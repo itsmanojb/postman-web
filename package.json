@@ -1,7 +1,12 @@
 {
   "name": "postman-clone",
+  "description": "Postman clone built with React.",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Manoj Barman",
+    "url": "https://manojbarman.in"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
