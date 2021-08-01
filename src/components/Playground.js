@@ -9,6 +9,11 @@ import ResponseViewer from './ResponseViewer';
 const Playground = () => {
   const [panelOpened, setPanelOpened] = useState(false);
   const [splitView, setSplitView] = useState('H');
+  const [payloadSize, setPayloadSize] = useState('small');
+
+  const togglePayloadView = (collapsed) => {
+    setPayloadSize(collapsed ? 'full' : 'small');
+  };
 
   return (
     <main className={styles.wrapper}>
@@ -46,8 +51,8 @@ const Playground = () => {
                 : styles.panel_vertical
             }
           >
-            <PayloadForm />
-            <ResponseViewer />
+            <PayloadForm viewMode={payloadSize} />
+            <ResponseViewer onToggle={togglePayloadView} />
           </div>
         </div>
         <div

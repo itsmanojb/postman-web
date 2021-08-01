@@ -6,12 +6,12 @@
   --text-size-md: 15px;
   --text-size-lg: 18px;
 
-  --sidebar-width: 400px;
+  --sidebar-width: 380px;
   --font: 'Roboto', sans-serif;
 
   /* Colors */
-  --theme-color: #e9542b;
-  --light-bg: #eaeaea;
+  --theme-color: #ff6c37;
+  --light-bg: #ececec;
   --light-bg-hover: #ddd;
   --bg-color: #fff;
   --drawer-color: #f7f7f7;
@@ -64,4 +64,17 @@ ul {
 
 .App main {
   flex: 1;
+}
+
+input::-webkit-input-placeholder {
+  color: #bbb;
+}
+input::-moz-placeholder {
+  color: #bbb;
+}
+input:-ms-input-placeholder {
+  color: #bbb;
+}
+input:-moz-placeholder {
+  color: #bbb;
 }

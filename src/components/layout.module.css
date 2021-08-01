@@ -2,7 +2,7 @@
 
 .header {
   border-bottom: 1px solid var(--border-color);
-  padding-inline: var(--padding);
+  padding-inline: calc(var(--padding) / 2);
   display: flex;
   justify-content: space-between;
 }
@@ -41,6 +41,119 @@
   font-size: 14px;
   color: var(--text-color);
   font-weight: 500;
+}
+
+.search_box {
+  background-color: var(--light-bg);
+  border-radius: 5px;
+  padding: 5px 32px;
+  color: var(--text-color);
+  margin: 6px auto;
+  text-align: center;
+}
+
+.search_box input {
+  background: transparent;
+  border: none;
+  padding: 5px;
+  margin-left: 5px;
+}
+
+.iconMenu {
+  display: flex;
+  align-items: center;
+  width: 40px;
+  justify-content: center;
+}
+
+.iconMenu button {
+  height: 36px;
+  width: 36px;
+  border-radius: 3px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  font-size: 16px;
+}
+
+.iconMenu button:hover {
+  background-color: var(--light-bg);
+}
+
+.inviteMenu {
+  display: flex;
+  align-items: center;
+  width: 100px;
+  justify-content: center;
+}
+
+.inviteMenu button {
+  height: 26px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  font-size: 13px;
+  background-color: #1862e8;
+  padding: 2px 12px;
+  color: #fff;
+}
+
+.inviteMenu button i {
+  margin-right: 5px;
+  font-size: 15px;
+}
+
+.userMenu {
+  display: flex;
+  align-items: center;
+  width: 40px;
+  justify-content: center;
+}
+
+.userMenu > div {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: #eee;
+  border: 1px solid #ccc;
+}
+
+.upgradeMenu {
+  display: flex;
+  align-items: center;
+  width: 140px;
+  justify-content: flex-end;
+}
+
+.upgradeMenu > div {
+  background-color: var(--light-bg);
+  border-radius: 3px;
+}
+
+.upgradeMenu > div button {
+  background: transparent;
+  border: none;
+  padding: 9px 12px;
+  color: var(--text-color);
+  cursor: pointer;
+  height: 34px;
+}
+
+.upgradeMenu > div button:hover {
+  background: var(--light-bg-hover);
+}
+
+.upgradeMenu button:first-of-type {
+  border-radius: 3px 0 0 3px;
+}
+
+.upgradeMenu button:last-of-type {
+  border-left: 1px solid #ddd;
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 0 3px 3px 0;
 }
 
 /* Sidebar */

@@ -7,6 +7,10 @@
     "name": "Manoj Barman",
     "url": "https://manojbarman.in"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itsmanojb/postman-web.git"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
