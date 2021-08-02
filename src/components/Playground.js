@@ -6,9 +6,8 @@ import URLBox from './URLBox';
 import PayloadForm from './PayloadForm';
 import ResponseViewer from './ResponseViewer';
 
-const Playground = () => {
+const Playground = ({ split }) => {
   const [panelOpened, setPanelOpened] = useState(false);
-  const [splitView, setSplitView] = useState('H');
   const [payloadSize, setPayloadSize] = useState('small');
 
   const togglePayloadView = (collapsed) => {
@@ -46,12 +45,10 @@ const Playground = () => {
           <URLBox />
           <div
             className={
-              splitView === 'H'
-                ? styles.panel_horizontal
-                : styles.panel_vertical
+              split === 'V' ? styles.panel_vertical : styles.panel_horizontal
             }
           >
-            <PayloadForm viewMode={payloadSize} />
+            <PayloadForm viewMode={payloadSize} splitMode={split} />
             <ResponseViewer onToggle={togglePayloadView} />
           </div>
         </div>

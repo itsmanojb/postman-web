@@ -240,12 +240,13 @@
 .panel_vertical {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   flex: 1;
   border-top: 1px solid var(--border-color);
 }
 
 .panel_vertical > div {
-  flex: 1;
+  width: 50%;
 }
 
 .panel_vertical > div + div {
@@ -359,6 +360,12 @@
   padding-inline: calc(var(--padding) / 2);
 }
 
+.payload_types_small {
+  display: flex;
+  padding-inline: calc(var(--padding) / 2);
+  flex-wrap: wrap;
+}
+
 .payload_tab {
   color: #666;
   font-size: 13px;
@@ -466,6 +473,30 @@
   display: flex;
   padding-block: 0;
   align-items: center;
+}
+
+.qp_table_small {
+  composes: qp_table;
+}
+
+.qp_table_small thead tr th:first-child,
+.qp_table_small tbody tr td:first-child {
+  width: 30px;
+}
+
+.qp_table_small thead tr th:nth-child(2),
+.qp_table_small tbody tr td:nth-child(2) {
+  width: 120px;
+}
+
+.qp_table_small thead tr th:nth-child(3),
+.qp_table_small tbody tr td:nth-child(3) {
+  width: 120px;
+}
+
+.qp_table_small thead tr th:nth-child(4),
+.qp_table_small tbody tr td:nth-child(4) {
+  width: 100%;
 }
 
 .qp_options {

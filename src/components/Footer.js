@@ -1,6 +1,14 @@
+import { useState } from 'react';
 import styles from './layout.module.css';
 
-const Footer = () => {
+const Footer = ({ onSplitViewChange }) => {
+  const [split, setSplit] = useState('V');
+
+  const toggleSplitView = () => {
+    setSplit((split) => (split === 'H' ? 'V' : 'H'));
+    onSplitViewChange(split);
+  };
+
   return (
     <footer className={styles.footer}>
       <ul className={styles.footer_menu__left}>
@@ -21,8 +29,12 @@ const Footer = () => {
         <li>
           <i className="feather-trash-2"></i> Trash
         </li>
-        <li>
-          <i className="feather-credit-card"></i>
+        <li onClick={toggleSplitView}>
+          <i
+            className={
+              split === 'H' ? 'feather-credit-card' : 'feather-sidebar'
+            }
+          ></i>
         </li>
         <li style={{ paddingInline: '4px' }}>
           <i className="feather-help-circle" style={{ marginRight: 0 }}></i>

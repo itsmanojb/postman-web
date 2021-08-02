@@ -1,9 +1,13 @@
 import styles from './playground.module.css';
 
-const PayloadForm = ({ viewMode }) => {
+const PayloadForm = ({ viewMode, splitMode }) => {
   return (
     <div className={styles.payload_panel}>
-      <ul className={styles.payload_types}>
+      <ul
+        className={
+          splitMode === 'H' ? styles.payload_types : styles.payload_types_small
+        }
+      >
         <li className={styles.payload_tab_active}>Params</li>
         <li className={styles.payload_tab}>Authorization</li>
         <li className={styles.payload_tab}>Headers</li>
@@ -14,12 +18,16 @@ const PayloadForm = ({ viewMode }) => {
       </ul>
       <div
         className={
-          viewMode === 'full'
+          viewMode === 'full' || splitMode === 'V'
             ? styles.payload_wrapper_full
             : styles.payload_wrapper
         }
       >
-        <table className={styles.qp_table}>
+        <table
+          className={
+            splitMode === 'H' ? styles.qp_table : styles.qp_table_small
+          }
+        >
           <caption>Query Params</caption>
           <thead>
             <tr>
