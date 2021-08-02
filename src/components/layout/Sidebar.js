@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import styles from './layout.module.css';
-import TabAPIs from './tabs/TabAPIs';
-import TabCollections from './tabs/TabCollections';
-import TabEnv from './tabs/TabEnv';
-import TabHistory from './tabs/TabHistory';
-import TabMonitors from './tabs/TabMonitors';
-import TabServers from './tabs/TabServers';
+import TabAPIs from '../tabs/TabAPIs';
+import TabCollections from '../tabs/TabCollections';
+import TabEnv from '../tabs/TabEnv';
+import TabHistory from '../tabs/TabHistory';
+import TabMonitors from '../tabs/TabMonitors';
+import TabServers from '../tabs/TabServers';
 
 const Sidebar = () => {
   const [selectedTab, setSelectedTab] = useState('collections');

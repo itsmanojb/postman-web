@@ -17,7 +17,7 @@ const Playground = ({ split }) => {
   return (
     <main className={styles.wrapper}>
       <Toolbar />
-      <div className={styles.main}>
+      <div className={panelOpened ? styles.main : styles.main_collapsed}>
         <div className={styles.container}>
           <div className={styles.panelheader}>
             <div className={styles.title_area}>
@@ -49,13 +49,13 @@ const Playground = ({ split }) => {
             }
           >
             <PayloadForm viewMode={payloadSize} splitMode={split} />
-            <ResponseViewer onToggle={togglePayloadView} />
+            <ResponseViewer onToggle={togglePayloadView} splitMode={split} />
           </div>
         </div>
         <div
           className={panelOpened ? styles.panel_opened : styles.panel_collapsed}
         >
-          <RightPanel />
+          <RightPanel onToggle={setPanelOpened} />
         </div>
       </div>
     </main>

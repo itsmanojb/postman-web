@@ -118,7 +118,7 @@
   appearance: none;
   border-radius: 0;
   font-family: inherit;
-  background: url('../images/chevron-down.svg') no-repeat;
+  background: url('../../images/chevron-down.svg') no-repeat;
   background-size: 15px;
   background-position: 97.5% center;
   padding: 0 calc(var(--padding) * 1.5);
@@ -137,12 +137,18 @@
 }
 
 .main {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 450px;
+}
+
+.main_collapsed {
+  display: grid;
+  grid-template-columns: 1fr 50px;
 }
 
 .container {
   flex: 1;
-  display: flex;
+  display: grid;
   flex-direction: column;
   overflow: hidden;
 }
@@ -247,6 +253,8 @@
 
 .panel_vertical > div {
   width: 50%;
+  height: 100%;
+  border-left: 1px solid var(--border-color);
 }
 
 .panel_vertical > div + div {
@@ -274,6 +282,10 @@
   color: var(--text-color);
 }
 
+.right_panel_active_link {
+  color: var(--theme-color) !important;
+}
+
 .panel_collapsed {
   composes: right_panel;
   width: 50px;
@@ -282,6 +294,63 @@
 .panel_opened {
   composes: right_panel;
   width: 450px;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+}
+
+.info_drawer {
+  width: 379px;
+  padding-inline-start: 5px;
+  padding-inline-end: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.info_drawer_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+  height: 40px;
+  margin-top: 10px;
+  color: #444;
+}
+
+.info_drawer_header button {
+  height: 32px;
+  width: 32px;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: 24px;
+  line-height: 1;
+  border: none;
+  font-weight: normal;
+  color: #555;
+}
+
+.info_drawer_header button:hover {
+  background-color: var(--light-bg);
+}
+
+.info_drawer_scroll {
+  height: calc(100vh - 174px);
+  overflow-y: auto;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+}
+
+.info_drawer_scroll::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.blank_drawer {
+  height: 100%;
+  display: grid;
+  place-content: center;
+  color: #999;
 }
 
 .url_box {
@@ -302,7 +371,7 @@
   padding-inline: var(--padding);
   border: 1px solid var(--border-color);
   border-inline-end: 0;
-  background: #f6f6f6 url('../images/chevron-down.svg') no-repeat;
+  background: #f6f6f6 url('../../images/chevron-down.svg') no-repeat;
   background-size: 15px;
   background-position: 90% center;
   color: var(--text-color);
@@ -585,7 +654,7 @@
 }
 
 .response_ph > div {
-  background: url('../images/postman.png') no-repeat;
+  background: url('../../images/postman.png') no-repeat;
   background-size: 220px;
   background-position: center top;
   height: 60px;

@@ -6,7 +6,7 @@
 
 .empty_tab img {
   object-fit: contain;
-  height: 150px;
+  height: 140px;
 }
 
 .empty_tab h4 {
@@ -24,7 +24,7 @@
 
 .empty_tab span {
   display: inline-block;
-  color: rgb(47, 84, 231);
+  color: rgb(27, 86, 212);
   cursor: pointer;
   font-size: 13px;
   font-weight: 500;

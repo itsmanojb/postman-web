@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './playground.module.css';
 
-const ResponseViewer = ({ onToggle }) => {
+const ResponseViewer = ({ onToggle, splitMode }) => {
   const [miniView, setMiniView] = useState(false);
 
   const toggleView = () => {
@@ -17,12 +17,14 @@ const ResponseViewer = ({ onToggle }) => {
     >
       <div className={styles.response_toggle_btn}>
         <span>Response</span>
-        <span
-          onClick={toggleView}
-          className={miniView ? styles.toggle_arrow : styles.toggle_arrow_up}
-        >
-          ▼
-        </span>
+        {splitMode === 'H' && (
+          <span
+            onClick={toggleView}
+            className={miniView ? styles.toggle_arrow : styles.toggle_arrow_up}
+          >
+            ▼
+          </span>
+        )}
       </div>
       {!miniView && (
         <div className={styles.response_ph}>
