@@ -1,0 +1,31 @@
+.empty_tab {
+  padding: 2rem 1rem;
+  text-align: center;
+  font-family: var(--font);
+}
+
+.empty_tab img {
+  object-fit: contain;
+  height: 150px;
+}
+
+.empty_tab h4 {
+  margin: 1rem 0;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.empty_tab p {
+  margin: 1rem 0;
+  font-size: 13px;
+  color: #888;
+}
+
+.empty_tab span {
+  display: inline-block;
+  color: rgb(47, 84, 231);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+}

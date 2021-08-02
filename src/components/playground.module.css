@@ -118,7 +118,7 @@
   appearance: none;
   border-radius: 0;
   font-family: inherit;
-  background: url('../chevron-down.svg') no-repeat;
+  background: url('../images/chevron-down.svg') no-repeat;
   background-size: 15px;
   background-position: 97.5% center;
   padding: 0 calc(var(--padding) * 1.5);
@@ -302,7 +302,7 @@
   padding-inline: var(--padding);
   border: 1px solid var(--border-color);
   border-inline-end: 0;
-  background: #f6f6f6 url('../chevron-down.svg') no-repeat;
+  background: #f6f6f6 url('../images/chevron-down.svg') no-repeat;
   background-size: 15px;
   background-position: 90% center;
   color: var(--text-color);
@@ -585,7 +585,7 @@
 }
 
 .response_ph > div {
-  background: url('../postman.png') no-repeat;
+  background: url('../images/postman.png') no-repeat;
   background-size: 220px;
   background-position: center top;
   height: 60px;
