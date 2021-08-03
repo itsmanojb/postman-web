@@ -446,7 +446,7 @@
 /* Payload Styles */
 
 .payload_panel {
-  padding-top: var(--padding);
+  /* padding-top: var(--padding); */
   flex: 1;
   /* height: 200px; */
 }

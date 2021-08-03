@@ -36,7 +36,7 @@ function AutoGrowInput({ value, onChange }) {
   );
 }
 
-const URLBox = ({ params }) => {
+const URLBox = ({ headers, params }) => {
   let apiURL = '';
   const [value, setValue] = useState('');
   const [formSubmitted, setFormSubmitted] = useState('');
@@ -51,7 +51,7 @@ const URLBox = ({ params }) => {
     e.preventDefault();
     setFormSubmitted(true);
     apiURL = params ? `${value}?${params}` : value;
-    console.log(apiURL);
+    console.log(apiURL, headers);
 
     setTimeout(() => {
       setFormSubmitted(false);
