@@ -1,7 +1,7 @@
 import styles from './playground.module.css';
 import QueryParamsTable from './QueryParamsTable';
 
-const PayloadForm = ({ viewMode, splitMode }) => {
+const PayloadForm = ({ viewMode, splitMode, onUpdate }) => {
   return (
     <div className={styles.payload_panel}>
       <ul
@@ -17,7 +17,11 @@ const PayloadForm = ({ viewMode, splitMode }) => {
         <li className={styles.payload_tab_disabled}>Tests</li>
         <li className={styles.payload_tab_disabled}>Settings</li>
       </ul>
-      <QueryParamsTable viewMode={viewMode} splitMode={splitMode} />
+      <QueryParamsTable
+        viewMode={viewMode}
+        splitMode={splitMode}
+        onParamsChange={onUpdate}
+      />
     </div>
   );
 };

@@ -45,11 +45,13 @@
 
 .search_box {
   background-color: var(--light-bg);
-  border-radius: 5px;
-  padding: 5px 32px;
+  border-radius: 3px;
+  padding: 2px 8px 2px 32px;
   color: var(--text-color);
   margin: 6px auto;
   text-align: center;
+  display: flex;
+  align-items: center;
 }
 
 .search_box input {

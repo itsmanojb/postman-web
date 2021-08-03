@@ -7,6 +7,7 @@ import PayloadForm from './PayloadForm';
 import ResponseViewer from './ResponseViewer';
 
 const Playground = ({ split }) => {
+  const [queryParams, setQueryParams] = useState('');
   const [panelOpened, setPanelOpened] = useState(false);
   const [payloadSize, setPayloadSize] = useState('small');
 
@@ -42,13 +43,17 @@ const Playground = ({ split }) => {
               </div>
             </div>
           </div>
-          <URLBox />
+          <URLBox params={queryParams} />
           <div
             className={
               split === 'V' ? styles.panel_vertical : styles.panel_horizontal
             }
           >
-            <PayloadForm viewMode={payloadSize} splitMode={split} />
+            <PayloadForm
+              viewMode={payloadSize}
+              splitMode={split}
+              onUpdate={setQueryParams}
+            />
             <ResponseViewer onToggle={togglePayloadView} splitMode={split} />
           </div>
         </div>

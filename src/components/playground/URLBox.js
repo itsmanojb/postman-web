@@ -1,19 +1,57 @@
 import { useState } from 'react';
 import styles from './playground.module.css';
 
-const URLBox = () => {
-  const [url, setURL] = useState('');
+function AutoGrowInput({ value, onChange }) {
+  return (
+    <div
+      className="auto-grow-input"
+      style={{
+        display: 'inline-grid',
+        alignItems: 'center',
+        justifyItems: 'start',
+        maxWidth: '500px',
+      }}
+    >
+      <input
+        value={value}
+        placeholder="http://example.com"
+        onChange={(event) => onChange(event.target.value)}
+        style={{
+          gridArea: '1 / 1 / 2 / 2',
+          width: '100%',
+          padding: 0,
+          border: 'none',
+          maxWidth: '600px',
+        }}
+      />
+      <span
+        style={{
+          gridArea: '1 / 1 / 2 / 2',
+          visibility: 'hidden',
+        }}
+      >
+        {value}
+      </span>
+    </div>
+  );
+}
+
+const URLBox = ({ params }) => {
+  let apiURL = '';
+  const [value, setValue] = useState('');
   const [formSubmitted, setFormSubmitted] = useState('');
   const [btnDisabled, setBtnDisabled] = useState(true);
 
   const handleChange = (e) => {
     setBtnDisabled(e.length <= 0);
-    setURL(e);
+    setValue(e);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormSubmitted(true);
+    apiURL = params ? `${value}?${params}` : value;
+    console.log(apiURL);
 
     setTimeout(() => {
       setFormSubmitted(false);
@@ -31,12 +69,10 @@ const URLBox = () => {
           <option value="PATCH">PATCH</option>
           <option value="DELETE">DELETE</option>
         </select>
-        <input
-          type="url"
-          value={url}
-          placeholder="http://example.com"
-          onChange={(e) => handleChange(e.target.value)}
-        />
+        <div>
+          <AutoGrowInput value={value} onChange={handleChange} />
+          <span>{params ? `?${params}` : ''} </span>
+        </div>
         <button type="submit" disabled={btnDisabled || formSubmitted}>
           {formSubmitted ? 'Sending...' : 'Send'}
         </button>

@@ -1,76 +1,36 @@
 import { useState } from 'react';
 import styles from './playground.module.css';
 
-const QueryRow = ({ onKVchange }) => {
-  const [selected, setSelected] = useState(true);
-  const [keyName, setKey] = useState('');
-  const [value, setValue] = useState('');
+const QueryParamsTable = ({ viewMode, splitMode, onParamsChange }) => {
+  const [inputList, setInputList] = useState([
+    { keyName: '', value: '', selected: true },
+  ]);
 
-  const onDelete = () => {
-    setKey('');
-    setValue('');
-    if (selected) {
-      onKVchange({ key: '', value: '' });
-    }
+  const handleInputChange = (e, index) => {
+    const { name, value, checked } = e.target;
+    const list = [...inputList];
+    list[index][name] = name === 'selected' ? checked : value;
+    setInputList(list);
+    getParams(list);
   };
 
-  const onChangeInput = (f, e) => {
-    if (f === 'k') {
-      setKey(e);
-    } else if (f === 'v') {
-      setValue(e);
-    }
+  const handleRemoveClick = (index) => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(() => list);
+    getParams(list);
   };
 
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      if (selected) {
-        onKVchange({ key: keyName, value });
-      }
-    }
+  const handleAddClick = () => {
+    setInputList([...inputList, { keyName: '', value: '', selected: true }]);
   };
 
-  return (
-    <tr>
-      <td>
-        <input
-          type="checkbox"
-          checked={selected}
-          onChange={() => setSelected(!selected)}
-        />
-      </td>
-      <td>
-        <input
-          type="text"
-          placeholder="Key"
-          value={keyName}
-          onChange={(e) => onChangeInput('k', e.target.value)}
-          onKeyPress={handleKeyPress}
-        />
-      </td>
-      <td>
-        <input
-          type="text"
-          placeholder="Value"
-          value={value}
-          onChange={(e) => onChangeInput('v', e.target.value)}
-          onKeyPress={handleKeyPress}
-        />
-      </td>
-      <td>
-        <input type="text" placeholder="Description" />
-        <span onClick={onDelete}>&times;</span>
-      </td>
-    </tr>
-  );
-};
-
-const QueryParamsTable = ({ viewMode, splitMode }) => {
-  const [qp, setQP] = useState('');
-
-  const setQueryParams = ({ key, value }) => {
-    const qpString = value ? `${key}=${value}` : `${key}`;
-    setQP(qpString);
+  const getParams = (list) => {
+    const params = list
+      .filter((qp) => qp.selected)
+      .map((e) => `${e.keyName}=${e.value}`)
+      .join('&');
+    onParamsChange(params);
   };
 
   return (
@@ -102,7 +62,58 @@ const QueryParamsTable = ({ viewMode, splitMode }) => {
           </tr>
         </thead>
         <tbody>
-          <QueryRow onKVchange={(e) => setQueryParams(e)} />
+          {inputList.map((x, i) => (
+            <>
+              <tr key={`qp-input-row-${i}`}>
+                <td>
+                  <input
+                    type="checkbox"
+                    name="selected"
+                    checked={x.selected}
+                    onChange={(e) => handleInputChange(e, i)}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Key"
+                    name="keyName"
+                    value={x.keyName}
+                    onChange={(e) => handleInputChange(e, i)}
+                    spellCheck={false}
+                    autoComplete="off"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Value"
+                    name="value"
+                    value={x.value}
+                    onChange={(e) => handleInputChange(e, i)}
+                    spellCheck={false}
+                    autoComplete="off"
+                  />
+                </td>
+                <td>
+                  <input type="text" placeholder="Description" />
+                  {inputList.length !== 1 && (
+                    <span onClick={() => handleRemoveClick(i)}>&times;</span>
+                  )}
+                </td>
+              </tr>
+              {inputList.length - 1 === i && (
+                <tr key="new-input-x">
+                  <td colSpan={4} className={styles.add_td}>
+                    <button onClick={handleAddClick}>
+                      <i className="feather-plus"></i>
+                    </button>
+                  </td>
+                </tr>
+              )}
+            </>
+            // <QueryRow key={i} onKVchange={(e) => setQueryParams(e)} />
+          ))}
         </tbody>
       </table>
     </div>

@@ -380,14 +380,41 @@
   cursor: pointer;
 }
 
-.url_box input {
-  border: none;
+.url_box form > div {
   border-radius: 0 3px 3px 0;
   padding-inline: var(--padding);
   margin-right: calc(var(--padding) / 2);
   border: 1px solid var(--border-color);
   background-color: #f6f6f6;
   color: var(--text-color);
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+}
+
+.url_box form > div::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.url_box input {
+  border: none;
+  border-radius: 0 3px 3px 0;
+  /* padding-inline-start: var(--padding); */
+  padding-right: 0;
+  background-color: #f6f6f6;
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+.url_box form > div span {
+  font-size: 14px;
+  color: var(--text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .url_box select:focus,
@@ -495,7 +522,7 @@
   font-size: 13px;
   font-weight: 500;
   color: #444;
-  padding: 10px var(--padding);
+  padding: 12px var(--padding) 10px;
 }
 
 .qp_table thead > tr {
@@ -521,6 +548,25 @@
   border-right: 1px solid var(--border-color);
   display: flex;
   align-items: center;
+}
+
+.add_td {
+  border: none !important;
+  justify-content: center;
+}
+
+.add_td button {
+  border: none;
+  height: 24px;
+  width: 26px;
+  border-radius: 2px;
+  font-size: 14px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.add_td button:hover {
+  background-color: var(--light-bg);
 }
 
 .qp_table thead tr th:nth-child(2),
