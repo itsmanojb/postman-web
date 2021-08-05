@@ -6,14 +6,10 @@ const Toolbar = () => {
       <div className={styles.tabs_wrapper}>
         <div className={styles.all_tabs}>
           <div className={styles.tab}>
-            <span>Lorem ipsum dolor sit amet.</span>
+            <span>Overview</span>
             <button type="button">&times;</button>
           </div>
           <div className={styles.tab_active}>
-            <span>Lorem ipsum dolor sit amet.</span>
-            <button type="button">&times;</button>
-          </div>
-          <div className={styles.tab}>
             <span>Lorem ipsum dolor sit amet.</span>
             <button type="button">&times;</button>
           </div>

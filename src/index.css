@@ -11,12 +11,14 @@
 
   /* Colors */
   --theme-color: #ff6c37;
+  --theme-color-light: #ffa537;
   --light-bg: #ececec;
   --light-bg-hover: #ddd;
   --bg-color: #fff;
   --drawer-color: #f9f9f9;
   --text-color: #666;
   --border-color: #eee;
+  --blue: rgb(27, 86, 212);
 }
 
 body,
@@ -32,8 +34,31 @@ code {
     monospace;
 }
 
+* {
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
 *:focus {
   outline: none;
+}
+
+input::-webkit-input-placeholder {
+  color: #bbb;
+}
+input::-moz-placeholder {
+  color: #bbb;
+}
+input:-ms-input-placeholder {
+  color: #bbb;
+}
+input:-moz-placeholder {
+  color: #bbb;
 }
 
 ul {
@@ -45,11 +70,11 @@ ul {
 .App {
   height: 100vh;
   overflow-y: hidden;
-  overflow-x: auto;
   display: grid;
   grid-template-rows: 48px 1fr 36px;
   min-width: 1200px;
   background-color: var(--bg-color);
+  overflow-x: auto;
 }
 
 .App > section {
@@ -64,17 +89,4 @@ ul {
 
 .App main {
   flex: 1;
-}
-
-input::-webkit-input-placeholder {
-  color: #bbb;
-}
-input::-moz-placeholder {
-  color: #bbb;
-}
-input:-ms-input-placeholder {
-  color: #bbb;
-}
-input:-moz-placeholder {
-  color: #bbb;
 }

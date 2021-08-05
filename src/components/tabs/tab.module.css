@@ -24,7 +24,7 @@
 
 .empty_tab span {
   display: inline-block;
-  color: rgb(27, 86, 212);
+  color: var(--blue);
   cursor: pointer;
   font-size: 13px;
   font-weight: 500;
