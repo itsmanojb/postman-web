@@ -1,24 +1,18 @@
 import { useState } from 'react';
 import styles from './layout.module.css';
 
-const Footer = ({ onSplitViewChange, onSidebarChange, drawerClosed }) => {
+const Footer = ({ onSplitViewChange, onSidebarChange }) => {
   const [split, setSplit] = useState('V');
-  const [collapsed, setCollapsed] = useState(!drawerClosed);
 
   const toggleSplitView = () => {
     setSplit((split) => (split === 'H' ? 'V' : 'H'));
     onSplitViewChange(split);
   };
 
-  const toggleSidebar = () => {
-    setCollapsed((collapsed) => !collapsed);
-    onSidebarChange(collapsed);
-  };
-
   return (
     <footer className={styles.footer}>
       <ul className={styles.footer_menu__left}>
-        <li onClick={toggleSidebar}>
+        <li onClick={(e) => onSidebarChange()}>
           <i className="feather-sidebar"></i>
         </li>
         <li>

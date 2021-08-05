@@ -8,19 +8,23 @@ function App() {
   const [splitView, setSplitView] = useState('H');
   const [sideCollapsed, setSideCollapsed] = useState(true);
 
+  const toggleSidebar = () => setSideCollapsed(!sideCollapsed);
+
   return (
     <div className="App">
       <Header />
       <section>
         <aside className={sideCollapsed ? 'collapsed' : ''}>
-          <Sidebar collapsed={sideCollapsed} />
+          <Sidebar
+            collapsed={sideCollapsed}
+            onMenuClick={(e) => setSideCollapsed(!e)}
+          />
         </aside>
         <Playground split={splitView} />
       </section>
       <Footer
-        drawerClosed={sideCollapsed}
         onSplitViewChange={setSplitView}
-        onSidebarChange={setSideCollapsed}
+        onSidebarChange={toggleSidebar}
       />
     </div>
   );

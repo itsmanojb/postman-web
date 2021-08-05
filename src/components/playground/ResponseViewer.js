@@ -4,7 +4,7 @@ import ResponseWrapper from './response/ResponseWrapper';
 
 const ResponseViewer = ({ onToggle, splitMode }) => {
   const [miniView, setMiniView] = useState(false);
-  const [response, setResponse] = useState({});
+  const [response, setResponse] = useState(null);
 
   const toggleView = () => {
     setMiniView(!miniView);

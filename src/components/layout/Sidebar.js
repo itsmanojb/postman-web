@@ -7,12 +7,14 @@ import TabHistory from '../tabs/TabHistory';
 import TabMonitors from '../tabs/TabMonitors';
 import TabServers from '../tabs/TabServers';
 
-const Sidebar = ({ collapsed }) => {
+const Sidebar = ({ collapsed, onMenuClick }) => {
   const [selectedTab, setSelectedTab] = useState('collections');
 
   const setCurrentTab = (e) => {
+    onMenuClick(true);
     setSelectedTab(e);
   };
+
   return (
     <div className={styles.sidebar}>
       {!collapsed && (
@@ -40,7 +42,9 @@ const Sidebar = ({ collapsed }) => {
               onClick={(e) => setCurrentTab('collections')}
               className={
                 selectedTab === 'collections'
-                  ? styles.sidebar_tab_button_active
+                  ? collapsed
+                    ? ''
+                    : styles.sidebar_tab_button_active
                   : ''
               }
               title="Collections"
@@ -51,7 +55,11 @@ const Sidebar = ({ collapsed }) => {
             <li
               onClick={(e) => setCurrentTab('api')}
               className={
-                selectedTab === 'api' ? styles.sidebar_tab_button_active : ''
+                selectedTab === 'api'
+                  ? collapsed
+                    ? ''
+                    : styles.sidebar_tab_button_active
+                  : ''
               }
               title="APIs"
             >
@@ -61,7 +69,11 @@ const Sidebar = ({ collapsed }) => {
             <li
               onClick={(e) => setCurrentTab('env')}
               className={
-                selectedTab === 'env' ? styles.sidebar_tab_button_active : ''
+                selectedTab === 'env'
+                  ? collapsed
+                    ? ''
+                    : styles.sidebar_tab_button_active
+                  : ''
               }
               title="Environments"
             >
@@ -72,7 +84,9 @@ const Sidebar = ({ collapsed }) => {
               onClick={(e) => setCurrentTab('servers')}
               className={
                 selectedTab === 'servers'
-                  ? styles.sidebar_tab_button_active
+                  ? collapsed
+                    ? ''
+                    : styles.sidebar_tab_button_active
                   : ''
               }
               title="Mock Servers"
@@ -84,7 +98,9 @@ const Sidebar = ({ collapsed }) => {
               onClick={(e) => setCurrentTab('monitors')}
               className={
                 selectedTab === 'monitors'
-                  ? styles.sidebar_tab_button_active
+                  ? collapsed
+                    ? ''
+                    : styles.sidebar_tab_button_active
                   : ''
               }
               title="Monitors"
@@ -96,7 +112,9 @@ const Sidebar = ({ collapsed }) => {
               onClick={(e) => setCurrentTab('history')}
               className={
                 selectedTab === 'history'
-                  ? styles.sidebar_tab_button_active
+                  ? collapsed
+                    ? ''
+                    : styles.sidebar_tab_button_active
                   : ''
               }
               title="History"

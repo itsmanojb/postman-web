@@ -152,7 +152,7 @@
 }
 
 .upgradeMenu button:last-of-type {
-  border-left: 1px solid #ddd;
+  border-left: 1px solid var(--divider-color);
   font-size: 16px;
   padding: 8px;
   border-radius: 0 3px 3px 0;
@@ -160,7 +160,7 @@
 
 /* Sidebar */
 .sidebar {
-  --border-color: #eaeaea;
+  --border-color: var(--drawer-border-color);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -178,6 +178,7 @@
 .sidebar_title {
   display: flex;
   align-items: center;
+  color: var(--text-color);
 }
 
 .sidebar_title span {
@@ -197,6 +198,7 @@
   padding: 4px 8px;
   margin-left: 5px;
   cursor: pointer;
+  color: var(--text-color);
 }
 
 .sidebar_actions button:hover {
@@ -230,7 +232,7 @@
 }
 
 .sidebar_tab_buttons ul li:hover {
-  background-color: #eaeaea;
+  background-color: var(--drawer-hover-color);
 }
 
 .sidebar_tab_buttons ul li i {
@@ -244,7 +246,7 @@
 }
 
 .sidebar_tab_button_active {
-  background-color: #e0e0e0;
+  background-color: var(--drawer-active-color);
   border-inline-start: 2px solid var(--theme-color);
 }
 
@@ -260,17 +262,16 @@
 .sidebar_tab_buttons_collapsed ul li {
   display: flex;
   flex-direction: column;
-  height: 40px;
+  height: 42px;
   align-items: center;
   justify-content: center;
   padding-inline: 0.5rem;
   color: var(--text-color);
   cursor: pointer;
-  margin-bottom: 0.25rem;
 }
 
 .sidebar_tab_buttons_collapsed ul li:hover {
-  background-color: #eaeaea;
+  background-color: var(--drawer-hover-color);
 }
 
 .sidebar_tab_buttons_collapsed ul li i {

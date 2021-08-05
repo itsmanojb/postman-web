@@ -67,6 +67,7 @@
   cursor: pointer;
   background-color: transparent;
   opacity: 0;
+  color: var(--text-color);
 }
 
 .tab:hover button {
@@ -102,6 +103,7 @@
   justify-content: center;
   border-inline: none;
   padding-inline: 10px;
+  color: var(--text-color);
 }
 
 .env_menu {
@@ -164,7 +166,7 @@
   margin: 0;
   font-size: 15px;
   padding: 0 var(--padding);
-  color: #333;
+  color: var(--text-color-dark);
   font-weight: 500;
 }
 
@@ -216,7 +218,7 @@
 .view_options button {
   height: 30px;
   width: 38px;
-  background-color: #fff;
+  background-color: var(--bg-color);
   border: none;
   border-radius: 3px;
 }
@@ -354,7 +356,7 @@
 }
 
 .url_box {
-  --border-color: #ddd;
+  --border-color: var(--light-bg-hover);
   padding: calc(var(--padding) / 2);
 }
 
@@ -371,7 +373,8 @@
   padding-inline: var(--padding);
   border: 1px solid var(--border-color);
   border-inline-end: 0;
-  background: #f6f6f6 url('../../images/chevron-down.svg') no-repeat;
+  background: var(--urlbox-bg-color) url('../../images/chevron-down.svg')
+    no-repeat;
   background-size: 15px;
   background-position: 90% center;
   color: var(--text-color);
@@ -385,7 +388,7 @@
   padding-inline: var(--padding);
   margin-right: calc(var(--padding) / 2);
   border: 1px solid var(--border-color);
-  background-color: #f6f6f6;
+  background-color: var(--urlbox-bg-color);
   color: var(--text-color);
   display: flex;
   align-items: center;
@@ -404,7 +407,7 @@
   border-radius: 0 3px 3px 0;
   /* padding-inline-start: var(--padding); */
   padding-right: 0;
-  background-color: #f6f6f6;
+  background-color: var(--urlbox-bg-color);
   color: var(--text-color);
   font-size: 14px;
 }
@@ -572,6 +575,7 @@
   font-size: 14px;
   background: transparent;
   cursor: pointer;
+  color: var(--text-color);
 }
 
 .add_td button:hover {
@@ -607,7 +611,7 @@
 }
 
 .qp_table tbody tr:focus-within td {
-  background-color: #f9f9f9;
+  background-color: var(--td-focus-bg);
 }
 
 .qp_table tbody tr:focus-within td input:empty {
@@ -615,7 +619,7 @@
 }
 
 .qp_table tbody tr:focus-within td input:focus {
-  border-color: #eee;
+  border-color: var(--td-input-focus-border);
 }
 
 .qp_table_small {
@@ -704,7 +708,7 @@
 }
 
 .qp_table tbody td input:focus {
-  background-color: #fff;
+  background-color: var(--td-input-focus-bg);
 }
 
 /* Response styles */
