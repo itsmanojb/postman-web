@@ -6,7 +6,7 @@ import Playground from './components/playground/Playground';
 
 function App() {
   const [splitView, setSplitView] = useState('H');
-  const [sideCollapsed, setSideCollapsed] = useState(false);
+  const [sideCollapsed, setSideCollapsed] = useState(true);
 
   return (
     <div className="App">
@@ -18,6 +18,7 @@ function App() {
         <Playground split={splitView} />
       </section>
       <Footer
+        drawerClosed={sideCollapsed}
         onSplitViewChange={setSplitView}
         onSidebarChange={setSideCollapsed}
       />

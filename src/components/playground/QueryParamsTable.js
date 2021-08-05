@@ -37,7 +37,9 @@ const QueryParamsTable = ({ viewMode, splitMode, onParamsChange }) => {
     <div
       className={
         viewMode === 'full' || splitMode === 'V'
-          ? styles.payload_wrapper_full
+          ? splitMode === 'V'
+            ? styles.payload_wrapper_full_v
+            : styles.payload_wrapper_full
           : styles.payload_wrapper
       }
     >

@@ -501,12 +501,20 @@
 
 .payload_wrapper_full {
   overflow-y: auto;
-  height: calc(100vh - 316px);
+  height: calc(100vh - 301px);
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
 }
 
-.payload_wrapper_full::-webkit-scrollbar {
+.payload_wrapper_full_v {
+  overflow-y: auto;
+  height: calc(100vh - 290px);
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+}
+
+.payload_wrapper_full::-webkit-scrollbar,
+.payload_wrapper_full_v::-webkit-scrollbar {
   width: 0 !important;
   height: 0 !important;
 }
@@ -710,7 +718,7 @@
 
 .response_panel__blank {
   overflow: hidden;
-  min-height: 240px;
+  min-height: calc(100vh - 427px);
   position: relative;
 }
 

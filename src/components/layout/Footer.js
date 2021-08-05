@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import styles from './layout.module.css';
 
-const Footer = ({ onSplitViewChange, onSidebarChange }) => {
+const Footer = ({ onSplitViewChange, onSidebarChange, drawerClosed }) => {
   const [split, setSplit] = useState('V');
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(!drawerClosed);
 
   const toggleSplitView = () => {
     setSplit((split) => (split === 'H' ? 'V' : 'H'));
