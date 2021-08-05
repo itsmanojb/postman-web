@@ -7,6 +7,7 @@
   --text-size-lg: 18px;
 
   --sidebar-width: 380px;
+  --sidebar-width-collapsed: 40px;
   --font: 'Roboto', sans-serif;
 
   /* Colors */
@@ -85,6 +86,11 @@ ul {
   width: var(--sidebar-width);
   border-right: 1px solid var(--border-color);
   background-color: var(--drawer-color);
+}
+
+.App aside.collapsed {
+  width: var(--sidebar-width-collapsed);
+  background-color: var(--bg-color);
 }
 
 .App main {

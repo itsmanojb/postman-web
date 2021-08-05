@@ -81,7 +81,7 @@ const ResponseWrapper = ({ view = 'H', reload }) => {
                 </div>
                 <div className={style.tab_group}>
                   <button>
-                    <i class="feather-corner-down-left"></i>
+                    <i className="feather-corner-down-left"></i>
                   </button>
                 </div>
               </div>

@@ -6,17 +6,21 @@ import Playground from './components/playground/Playground';
 
 function App() {
   const [splitView, setSplitView] = useState('H');
+  const [sideCollapsed, setSideCollapsed] = useState(false);
 
   return (
     <div className="App">
       <Header />
       <section>
-        <aside>
-          <Sidebar />
+        <aside className={sideCollapsed ? 'collapsed' : ''}>
+          <Sidebar collapsed={sideCollapsed} />
         </aside>
         <Playground split={splitView} />
       </section>
-      <Footer onSplitViewChange={setSplitView} />
+      <Footer
+        onSplitViewChange={setSplitView}
+        onSidebarChange={setSideCollapsed}
+      />
     </div>
   );
 }
