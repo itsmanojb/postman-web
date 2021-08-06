@@ -1,8 +1,6 @@
-import { useState } from 'react';
 import style from './response.module.css';
 
-const HeadersTable = () => {
-  const [headers, setHeaders] = useState([]);
+const HeadersTable = ({ headers = [] }) => {
   return (
     <table className={style.headers_table}>
       <thead>
@@ -13,11 +11,11 @@ const HeadersTable = () => {
         </tr>
       </thead>
       <tbody>
-        {headers.map((header, i) => (
+        {headers.map(([key, value], i) => (
           <tr key={`rsp-h-${i}`}>
             <td></td>
-            <td></td>
-            <td></td>
+            <td>{key}</td>
+            <td>{value}</td>
           </tr>
         ))}
       </tbody>

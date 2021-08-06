@@ -32,6 +32,7 @@
   --divider-color: #ddd;
   --overlay-color: rgba(255, 255, 255, 0.5);
   --blue: rgb(27, 86, 212);
+  --input-placeholder: #bbb;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -54,6 +55,7 @@
     --td-input-focus-border: #292929;
     --divider-color: #333;
     --overlay-color: rgba(35, 35, 35, 0.5);
+    --input-placeholder: #444;
   }
 }
 
@@ -84,17 +86,11 @@ code {
   outline: none;
 }
 
-input::-webkit-input-placeholder {
-  color: #bbb;
-}
-input::-moz-placeholder {
-  color: #bbb;
-}
-input:-ms-input-placeholder {
-  color: #bbb;
-}
+input::-webkit-input-placeholder,
+input::-moz-placeholder,
+input:-ms-input-placeholder,
 input:-moz-placeholder {
-  color: #bbb;
+  color: var(--input-placeholder);
 }
 
 ul {

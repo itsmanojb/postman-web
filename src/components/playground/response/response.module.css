@@ -314,7 +314,7 @@
 .headers_table thead th {
   font-weight: 500;
   font-size: 13px;
-  color: #444;
+  color: var(--text-color);
   padding: 10px 6px;
   text-align: left;
 }
@@ -346,7 +346,7 @@
 
 .headers_table tbody tr td {
   font-size: 14px;
-  color: #444;
+  color: var(--text-color);
   padding-inline: 6px;
   text-align: left;
   border-bottom: 1px solid var(--border-color);

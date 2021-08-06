@@ -9,6 +9,23 @@ import axios from 'axios';
 import { Context } from '../../Store';
 import styles from './playground.module.css';
 
+axios.interceptors.request.use((request) => {
+  request.customData = request.customData || {};
+  request.customData.startTime = new Date().getTime();
+  return request;
+});
+
+function updateEndTime(response) {
+  response.customData = response.customData || {};
+  response.customData.time =
+    new Date().getTime() - response.config.customData.startTime;
+  return response;
+}
+
+axios.interceptors.response.use(updateEndTime, (e) => {
+  return Promise.reject(updateEndTime(e.response));
+});
+
 const AutoGrowInput = forwardRef((props, ref) => {
   const inputRef = useRef();
   useImperativeHandle(ref, () => ({
@@ -63,6 +80,7 @@ const URLBox = ({ headers, params }) => {
 
   const handleChange = (e) => {
     setBtnDisabled(e.length <= 0);
+    if (method === '') setMethod('GET');
     setUrl(e);
   };
 
@@ -78,16 +96,11 @@ const URLBox = ({ headers, params }) => {
     console.log(fullUrl, headers);
 
     axios({ method, url: fullUrl })
+      .catch((e) => e)
       .then((res) => {
         dispatch({
           type: 'SET_API_RESPONSE',
-          payload: { success: true, data: res, err: null },
-        });
-      })
-      .catch((err) => {
-        dispatch({
-          type: 'SET_API_RESPONSE',
-          payload: { success: false, data: null, err },
+          payload: { ...res },
         });
       });
   };

@@ -115,17 +115,18 @@
 }
 
 .userMenu > div {
-  height: 30px;
-  width: 30px;
+  height: 26px;
+  width: 26px;
   border-radius: 50%;
-  background-color: #eee;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
+  background: url('../../images/default-avatar.png') no-repeat center;
+  background-size: contain;
 }
 
 .upgradeMenu {
   display: flex;
   align-items: center;
-  width: 140px;
+  width: 130px;
   justify-content: flex-end;
 }
 
@@ -137,7 +138,7 @@
 .upgradeMenu > div button {
   background: transparent;
   border: none;
-  padding: 9px 12px;
+  padding: 9px 16px;
   color: var(--text-color);
   cursor: pointer;
   height: 34px;
