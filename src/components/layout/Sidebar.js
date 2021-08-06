@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './layout.module.css';
 import TabAPIs from '../tabs/TabAPIs';
 import TabCollections from '../tabs/TabCollections';
@@ -6,18 +6,20 @@ import TabEnv from '../tabs/TabEnv';
 import TabHistory from '../tabs/TabHistory';
 import TabMonitors from '../tabs/TabMonitors';
 import TabServers from '../tabs/TabServers';
+import { Context } from '../../Store';
 
-const Sidebar = ({ collapsed, onMenuClick }) => {
+const Sidebar = () => {
+  const [state, dispatch] = useContext(Context);
   const [selectedTab, setSelectedTab] = useState('collections');
 
   const setCurrentTab = (e) => {
-    onMenuClick(true);
     setSelectedTab(e);
+    dispatch({ type: 'SET_SIDEDRAWER', payload: true });
   };
 
   return (
     <div className={styles.sidebar}>
-      {!collapsed && (
+      {state.sideDrawerOpened && (
         <div className={styles.sidebar_header}>
           <div className={styles.sidebar_title}>
             <i className="feather-user"></i>
@@ -32,7 +34,7 @@ const Sidebar = ({ collapsed, onMenuClick }) => {
       <div className={styles.sidebar_tabs}>
         <div
           className={
-            collapsed
+            !state.sideDrawerOpened
               ? styles.sidebar_tab_buttons_collapsed
               : styles.sidebar_tab_buttons
           }
@@ -42,9 +44,9 @@ const Sidebar = ({ collapsed, onMenuClick }) => {
               onClick={(e) => setCurrentTab('collections')}
               className={
                 selectedTab === 'collections'
-                  ? collapsed
-                    ? ''
-                    : styles.sidebar_tab_button_active
+                  ? state.sideDrawerOpened
+                    ? styles.sidebar_tab_button_active
+                    : ''
                   : ''
               }
               title="Collections"
@@ -56,9 +58,9 @@ const Sidebar = ({ collapsed, onMenuClick }) => {
               onClick={(e) => setCurrentTab('api')}
               className={
                 selectedTab === 'api'
-                  ? collapsed
-                    ? ''
-                    : styles.sidebar_tab_button_active
+                  ? state.sideDrawerOpened
+                    ? styles.sidebar_tab_button_active
+                    : ''
                   : ''
               }
               title="APIs"
@@ -70,9 +72,9 @@ const Sidebar = ({ collapsed, onMenuClick }) => {
               onClick={(e) => setCurrentTab('env')}
               className={
                 selectedTab === 'env'
-                  ? collapsed
-                    ? ''
-                    : styles.sidebar_tab_button_active
+                  ? state.sideDrawerOpened
+                    ? styles.sidebar_tab_button_active
+                    : ''
                   : ''
               }
               title="Environments"
@@ -84,9 +86,9 @@ const Sidebar = ({ collapsed, onMenuClick }) => {
               onClick={(e) => setCurrentTab('servers')}
               className={
                 selectedTab === 'servers'
-                  ? collapsed
-                    ? ''
-                    : styles.sidebar_tab_button_active
+                  ? state.sideDrawerOpened
+                    ? styles.sidebar_tab_button_active
+                    : ''
                   : ''
               }
               title="Mock Servers"
@@ -98,9 +100,9 @@ const Sidebar = ({ collapsed, onMenuClick }) => {
               onClick={(e) => setCurrentTab('monitors')}
               className={
                 selectedTab === 'monitors'
-                  ? collapsed
-                    ? ''
-                    : styles.sidebar_tab_button_active
+                  ? state.sideDrawerOpened
+                    ? styles.sidebar_tab_button_active
+                    : ''
                   : ''
               }
               title="Monitors"
@@ -112,9 +114,9 @@ const Sidebar = ({ collapsed, onMenuClick }) => {
               onClick={(e) => setCurrentTab('history')}
               className={
                 selectedTab === 'history'
-                  ? collapsed
-                    ? ''
-                    : styles.sidebar_tab_button_active
+                  ? state.sideDrawerOpened
+                    ? styles.sidebar_tab_button_active
+                    : ''
                   : ''
               }
               title="History"
@@ -124,7 +126,7 @@ const Sidebar = ({ collapsed, onMenuClick }) => {
             </li>
           </ul>
         </div>
-        {!collapsed && (
+        {state.sideDrawerOpened && (
           <div className={styles.sidebar_tab_panels}>
             {(() => {
               switch (selectedTab) {

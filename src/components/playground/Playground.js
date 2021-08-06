@@ -1,25 +1,23 @@
+import { useContext, useState } from 'react';
+import { Context } from '../../Store';
 import RightPanel from './RightPanel';
 import Toolbar from './Toolbar';
 import styles from './playground.module.css';
-import { useState } from 'react';
 import URLBox from './URLBox';
 import PayloadForm from './PayloadForm';
 import ResponseViewer from './ResponseViewer';
 
-const Playground = ({ split }) => {
+const Playground = () => {
+  const [state] = useContext(Context);
   const [queryParams, setQueryParams] = useState('');
   const [reqHeaders, setRequestHeaders] = useState([]);
-  const [panelOpened, setPanelOpened] = useState(false);
-  const [payloadSize, setPayloadSize] = useState('small');
-
-  const togglePayloadView = (collapsed) => {
-    setPayloadSize(collapsed ? 'full' : 'small');
-  };
 
   return (
     <main className={styles.wrapper}>
       <Toolbar />
-      <div className={panelOpened ? styles.main : styles.main_collapsed}>
+      <div
+        className={state.infoPanelOpened ? styles.main : styles.main_collapsed}
+      >
         <div className={styles.container}>
           <div className={styles.panelheader}>
             <div className={styles.title_area}>
@@ -47,22 +45,24 @@ const Playground = ({ split }) => {
           <URLBox params={queryParams} headers={reqHeaders} />
           <div
             className={
-              split === 'V' ? styles.panel_vertical : styles.panel_horizontal
+              state.splitView === 'V'
+                ? styles.panel_vertical
+                : styles.panel_horizontal
             }
           >
             <PayloadForm
-              viewMode={payloadSize}
-              splitMode={split}
               onParamsUpdate={setQueryParams}
               onHeadersUpdate={setRequestHeaders}
             />
-            <ResponseViewer onToggle={togglePayloadView} splitMode={split} />
+            <ResponseViewer />
           </div>
         </div>
         <div
-          className={panelOpened ? styles.panel_opened : styles.panel_collapsed}
+          className={
+            state.infoPanelOpened ? styles.panel_opened : styles.panel_collapsed
+          }
         >
-          <RightPanel onToggle={setPanelOpened} />
+          <RightPanel />
         </div>
       </div>
     </main>

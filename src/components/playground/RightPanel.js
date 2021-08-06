@@ -1,17 +1,19 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { Context } from '../../Store';
 import styles from './playground.module.css';
 
-const RightPanel = ({ onToggle, panel = '' }) => {
-  const [panelOpen, setPanelOpen] = useState(panel);
+const RightPanel = () => {
+  const [state, dispatch] = useContext(Context);
+  const [panelOpen, setPanelOpen] = useState('');
 
   const showPanel = (e) => {
     setPanelOpen(e);
-    onToggle(true);
+    dispatch({ type: 'SET_INFOPANEL', payload: true });
   };
 
   const closePanel = (e) => {
     setPanelOpen('');
-    onToggle(false);
+    dispatch({ type: 'SET_INFOPANEL', payload: false });
   };
 
   return (

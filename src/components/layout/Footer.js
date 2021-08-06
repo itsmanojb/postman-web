@@ -1,18 +1,25 @@
-import { useState } from 'react';
+import { useContext } from 'react';
+import { Context } from '../../Store';
 import styles from './layout.module.css';
 
-const Footer = ({ onSplitViewChange, onSidebarChange }) => {
-  const [split, setSplit] = useState('V');
+const Footer = () => {
+  const [state, dispatch] = useContext(Context);
 
   const toggleSplitView = () => {
-    setSplit((split) => (split === 'H' ? 'V' : 'H'));
-    onSplitViewChange(split);
+    dispatch({
+      type: 'SET_SPLIT_VIEW',
+      payload: state.splitView === 'H' ? 'V' : 'H',
+    });
+  };
+
+  const toggleSidebar = () => {
+    dispatch({ type: 'SET_SIDEDRAWER', payload: !state.sideDrawerOpened });
   };
 
   return (
     <footer className={styles.footer}>
       <ul className={styles.footer_menu__left}>
-        <li onClick={(e) => onSidebarChange()}>
+        <li onClick={toggleSidebar}>
           <i className="feather-sidebar"></i>
         </li>
         <li>
@@ -32,7 +39,9 @@ const Footer = ({ onSplitViewChange, onSidebarChange }) => {
         <li onClick={toggleSplitView}>
           <i
             className={
-              split === 'H' ? 'feather-credit-card' : 'feather-sidebar'
+              state.splitView === 'H'
+                ? 'feather-credit-card'
+                : 'feather-sidebar'
             }
           ></i>
         </li>

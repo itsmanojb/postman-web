@@ -30,10 +30,11 @@
   --td-input-focus-bg: #fff;
   --td-input-focus-border: #eee;
   --divider-color: #ddd;
+  --overlay-color: rgba(255, 255, 255, 0.5);
   --blue: rgb(27, 86, 212);
 }
 
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   body {
     --light-bg: #202020;
     --light-bg-hover: #242424;
@@ -52,8 +53,9 @@
     --td-input-focus-bg: #191919;
     --td-input-focus-border: #292929;
     --divider-color: #333;
+    --overlay-color: rgba(35, 35, 35, 0.5);
   }
-} */
+}
 
 body,
 html {

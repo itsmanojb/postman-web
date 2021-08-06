@@ -1,23 +1,39 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import LineLoader from './LineLoader';
 import HeadersTable from './HeadersTable';
 import style from './response.module.css';
+import { Context } from '../../../Store';
 
-const ResponseWrapper = ({ view = 'H', reload }) => {
+const ResponseWrapper = () => {
   let status = '200',
     time = '400ms',
     size = '2.5kb';
+
+  const [state, dispatch] = useContext(Context);
   const [respView, setRespView] = useState('body');
+
+  const cancelRequest = () => {
+    dispatch({ type: 'SET_FORM_SUBMIT', payload: false });
+  };
 
   return (
     <>
-      {reload && (
+      {state.formSubmitted && (
         <>
           <LineLoader />
-          <div className={style.overlay}></div>
+          <div className={style.overlay}>
+            <div>
+              <p>Sending request...</p>
+              <button type="button" onClick={cancelRequest}>
+                Cancel
+              </button>
+            </div>
+          </div>
         </>
       )}
-      <div className={view === 'V' ? style.wrapper_full : style.wrapper}>
+      <div
+        className={state.splitView === 'V' ? style.wrapper_full : style.wrapper}
+      >
         <div className={style.top}>
           <div className={style.header}>
             <ul className={style.payload_types}>

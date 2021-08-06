@@ -1,22 +1,21 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { Context } from '../../Store';
 import AuthHeaders from './AuthHeaders';
 import styles from './playground.module.css';
 import QueryParamsTable from './QueryParamsTable';
 import RequestBody from './RequestBody';
 import RequestHeadersTable from './RequestHeadersTable';
 
-const PayloadForm = ({
-  viewMode,
-  splitMode,
-  onParamsUpdate,
-  onHeadersUpdate,
-}) => {
+const PayloadForm = ({ onParamsUpdate, onHeadersUpdate }) => {
+  const [state] = useContext(Context);
   const [apiSettings, setApiSettings] = useState('qp');
   return (
     <div className={styles.payload_panel}>
       <ul
         className={
-          splitMode === 'H' ? styles.payload_types : styles.payload_types_small
+          state.splitView === 'H'
+            ? styles.payload_types
+            : styles.payload_types_small
         }
       >
         <li
@@ -66,25 +65,13 @@ const PayloadForm = ({
       {(() => {
         switch (apiSettings) {
           case 'qp':
-            return (
-              <QueryParamsTable
-                viewMode={viewMode}
-                splitMode={splitMode}
-                onParamsChange={onParamsUpdate}
-              />
-            );
+            return <QueryParamsTable onParamsChange={onParamsUpdate} />;
           case 'auth':
-            return <AuthHeaders viewMode={viewMode} splitMode={splitMode} />;
+            return <AuthHeaders />;
           case 'headers':
-            return (
-              <RequestHeadersTable
-                viewMode={viewMode}
-                splitMode={splitMode}
-                onHeadersChange={onHeadersUpdate}
-              />
-            );
+            return <RequestHeadersTable onHeadersChange={onHeadersUpdate} />;
           case 'body':
-            return <RequestBody viewMode={viewMode} splitMode={splitMode} />;
+            return <RequestBody />;
           default:
             return null;
         }

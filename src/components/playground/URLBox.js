@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { Context } from '../../Store';
 import styles from './playground.module.css';
 
 function AutoGrowInput({ value, onChange }) {
@@ -37,9 +38,9 @@ function AutoGrowInput({ value, onChange }) {
 }
 
 const URLBox = ({ headers, params }) => {
-  let apiURL = '';
+  const [state, dispatch] = useContext(Context);
+
   const [value, setValue] = useState('');
-  const [formSubmitted, setFormSubmitted] = useState('');
   const [btnDisabled, setBtnDisabled] = useState(true);
 
   const handleChange = (e) => {
@@ -49,13 +50,12 @@ const URLBox = ({ headers, params }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    apiURL = params ? `${value}?${params}` : value;
+    if (!state.responseUI) {
+      dispatch({ type: 'SHOW_RESPONSE_UI' });
+    }
+    dispatch({ type: 'SET_FORM_SUBMIT', payload: true });
+    const apiURL = params ? `${value}?${params}` : value;
     console.log(apiURL, headers);
-
-    setTimeout(() => {
-      setFormSubmitted(false);
-    }, 3000);
   };
 
   return (
@@ -73,8 +73,8 @@ const URLBox = ({ headers, params }) => {
           <AutoGrowInput value={value} onChange={handleChange} />
           <span>{params ? `?${params}` : ''} </span>
         </div>
-        <button type="submit" disabled={btnDisabled || formSubmitted}>
-          {formSubmitted ? 'Sending...' : 'Send'}
+        <button type="submit" disabled={btnDisabled || state.formSubmitted}>
+          {state.formSubmitted ? 'Sending...' : 'Send'}
         </button>
       </form>
     </div>

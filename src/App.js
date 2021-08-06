@@ -1,32 +1,32 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import Footer from './components/layout/Footer';
 import Header from './components/layout/Header';
 import Sidebar from './components/layout/Sidebar';
 import Playground from './components/playground/Playground';
+import Store, { Context } from './Store';
 
-function App() {
-  const [splitView, setSplitView] = useState('H');
-  const [sideCollapsed, setSideCollapsed] = useState(true);
-
-  const toggleSidebar = () => setSideCollapsed(!sideCollapsed);
+const AppInterface = () => {
+  const [state] = useContext(Context);
 
   return (
     <div className="App">
       <Header />
       <section>
-        <aside className={sideCollapsed ? 'collapsed' : ''}>
-          <Sidebar
-            collapsed={sideCollapsed}
-            onMenuClick={(e) => setSideCollapsed(!e)}
-          />
+        <aside className={state.sideDrawerOpened ? '' : 'collapsed'}>
+          <Sidebar />
         </aside>
-        <Playground split={splitView} />
+        <Playground />
       </section>
-      <Footer
-        onSplitViewChange={setSplitView}
-        onSidebarChange={toggleSidebar}
-      />
+      <Footer />
     </div>
+  );
+};
+
+function App() {
+  return (
+    <Store>
+      <AppInterface />
+    </Store>
   );
 }
 

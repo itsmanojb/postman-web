@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { Context } from '../../Store';
 import styles from './playground.module.css';
 
-const RequestHeadersTable = ({ viewMode, splitMode, onHeadersChange }) => {
+const RequestHeadersTable = ({ onHeadersChange }) => {
+  const [state] = useContext(Context);
   const [inputList, setInputList] = useState([
     { keyName: '', value: '', selected: true },
   ]);
@@ -36,13 +38,15 @@ const RequestHeadersTable = ({ viewMode, splitMode, onHeadersChange }) => {
   return (
     <div
       className={
-        viewMode === 'full' || splitMode === 'V'
+        state.responsePanelMinimized || state.splitView === 'V'
           ? styles.payload_wrapper_full
           : styles.payload_wrapper
       }
     >
       <table
-        className={splitMode === 'H' ? styles.qp_table : styles.qp_table_small}
+        className={
+          state.splitView === 'H' ? styles.qp_table : styles.qp_table_small
+        }
       >
         <caption>Headers</caption>
         <thead>
