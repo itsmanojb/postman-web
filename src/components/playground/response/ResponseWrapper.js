@@ -1,12 +1,16 @@
 import { useContext, useState } from 'react';
 import LineLoader from './LineLoader';
 import HeadersTable from './HeadersTable';
-import style from './response.module.css';
 import { Context } from '../../../Store';
+import ResponseBody from './ResponseBody';
+import style from './response.module.css';
 
 const ResponseWrapper = () => {
-  const [state, dispatch] = useContext(Context);
+  const { state, dispatch } = useContext(Context);
   const [respView, setRespView] = useState('body');
+  const [viewAs, setViewAs] = useState('pretty');
+  const [viewMode, setViewMode] = useState('json');
+  const [wordWrap, setWordWrap] = useState(false);
 
   const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
@@ -27,7 +31,7 @@ const ResponseWrapper = () => {
   }
 
   const cancelRequest = () => {
-    dispatch({ type: 'SET_FORM_SUBMIT', payload: false });
+    dispatch({ type: 'CANCEL_FORM_SUBMIT' });
   };
 
   return (
@@ -103,25 +107,63 @@ const ResponseWrapper = () => {
               <div className={style.more}>
                 <div className={style.tabs}>
                   <div className={style.tab_group}>
-                    <div className={style.tab_selected}>Pretty</div>
-                    <div>Raw</div>
-                    <div>Preview</div>
-                    <div>Visualize</div>
+                    <div
+                      onClick={() => setViewAs('pretty')}
+                      className={viewAs === 'pretty' ? style.tab_selected : ''}
+                    >
+                      Pretty
+                    </div>
+                    <div
+                      onClick={() => setViewAs('raw')}
+                      className={viewAs === 'raw' ? style.tab_selected : ''}
+                    >
+                      Raw
+                    </div>
+                    <div
+                      onClick={() => setViewAs('preview')}
+                      className={viewAs === 'preview' ? style.tab_selected : ''}
+                    >
+                      Preview
+                    </div>
+                    <div
+                      onClick={() => setViewAs('visual')}
+                      className={viewAs === 'visual' ? style.tab_selected : ''}
+                    >
+                      Visualize
+                    </div>
                   </div>
-                  <div className={style.tab_group}>
-                    <select name="" id="">
-                      <option value="json">JSON</option>
-                      <option value="xml">XML</option>
-                      <option value="html">HTML</option>
-                      <option value="text">Text</option>
-                      <option value="auto">Auto</option>
-                    </select>
-                  </div>
-                  <div className={style.tab_group}>
-                    <button>
-                      <i className="feather-corner-down-left"></i>
-                    </button>
-                  </div>
+                  {viewAs === 'pretty' && (
+                    <>
+                      <div className={style.tab_group}>
+                        <select
+                          value={viewMode}
+                          onChange={(event) => setViewMode(event.target.value)}
+                        >
+                          <option value="json">JSON</option>
+                          <option value="xml" disabled>
+                            XML
+                          </option>
+                          <option value="html" disabled>
+                            HTML
+                          </option>
+                          <option value="text" disabled>
+                            Text
+                          </option>
+                          <option value="auto" disabled>
+                            Auto
+                          </option>
+                        </select>
+                      </div>
+                      <div className={style.tab_group}>
+                        <button
+                          className={wordWrap ? style.button_selected : ''}
+                          onClick={() => setWordWrap(!wordWrap)}
+                        >
+                          <i className="feather-corner-down-left"></i>
+                        </button>
+                      </div>
+                    </>
+                  )}
                 </div>
                 <div className={style.resp_action}>
                   <button>
@@ -137,6 +179,15 @@ const ResponseWrapper = () => {
           <div className={style.scroll}>
             {(() => {
               switch (respView) {
+                case 'body':
+                  return (
+                    <ResponseBody
+                      data={state.apiResponse.data}
+                      wrap={wordWrap}
+                      viewAs={viewAs}
+                      viewMode={viewMode}
+                    />
+                  );
                 case 'headers':
                   return (
                     <HeadersTable
@@ -144,7 +195,7 @@ const ResponseWrapper = () => {
                     />
                   );
                 default:
-                  break;
+                  return;
               }
             })()}
           </div>

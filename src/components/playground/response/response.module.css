@@ -216,6 +216,10 @@
   background-color: var(--tabgroup-bg-selected);
 }
 
+.button_selected {
+  background-color: var(--tabgroup-bg-selected) !important;
+}
+
 .tab_group select {
   padding: 2px 12px;
   font-size: 13px;
@@ -298,6 +302,33 @@
 .scroll::-webkit-scrollbar {
   width: 0 !important;
   height: 0 !important;
+}
+
+.response_body {
+  margin: 0 0.5rem;
+}
+
+.res_preview {
+  background-color: #fff;
+  padding: 8px;
+  border-radius: 5px;
+  font-family: serif;
+  color: #000;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.res_raw {
+  padding-inline-start: 5px;
+  font-family: sans-serif;
+  color: var(--text-color);
+  font-size: 14px;
+  line-height: 1.1;
+}
+
+.res_raw pre {
+  margin: 0;
+  /* border-left: 1px solid var(--border-color); */
 }
 
 .headers_table {

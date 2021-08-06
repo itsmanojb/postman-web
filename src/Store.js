@@ -6,6 +6,12 @@ const initialState = {
   infoPanelOpened: false,
   splitView: 'H',
   responsePanelMinimized: false,
+  formData: {
+    method: '',
+    url: '',
+    params: '',
+    payload: null,
+  },
   formSubmitted: false,
   responseUI: false,
   apiResponse: null,
@@ -18,7 +24,7 @@ const Store = ({ children }) => {
   }, [state]);
 
   return (
-    <Context.Provider value={[state, dispatch]}>{children}</Context.Provider>
+    <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
   );
 };
 

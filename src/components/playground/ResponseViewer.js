@@ -4,7 +4,7 @@ import styles from './playground.module.css';
 import ResponseWrapper from './response/ResponseWrapper';
 
 const ResponseViewer = () => {
-  const [state, dispatch] = useContext(Context);
+  const { state, dispatch } = useContext(Context);
 
   const toggleView = () => {
     dispatch({

@@ -3,7 +3,7 @@ import { Context } from '../../Store';
 import styles from './playground.module.css';
 
 const RequestHeadersTable = ({ onHeadersChange }) => {
-  const [state] = useContext(Context);
+  const { state } = useContext(Context);
   const [inputList, setInputList] = useState([
     { keyName: '', value: '', selected: true },
   ]);

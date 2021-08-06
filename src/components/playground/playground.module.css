@@ -418,6 +418,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-left: -5px;
 }
 
 .url_box select:focus,

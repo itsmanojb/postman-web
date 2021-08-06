@@ -2,12 +2,21 @@ import { useContext, useState } from 'react';
 import { Context } from '../../Store';
 import styles from './playground.module.css';
 
-const QueryParamsTable = ({ onParamsChange }) => {
-  const [state] = useContext(Context);
+const QueryParamsTable = () => {
+  const { state, dispatch } = useContext(Context);
 
-  const [inputList, setInputList] = useState([
-    { keyName: '', value: '', selected: true },
-  ]);
+  const [inputList, setInputList] = useState(() => {
+    if (state.formData.params) {
+      const params = state.formData.params.split('&');
+      return params.map((p) => ({
+        keyName: p.split('=')[0],
+        value: p.split('=')[1],
+        selected: true,
+      }));
+    } else {
+      return [{ keyName: '', value: '', selected: true }];
+    }
+  });
 
   const handleInputChange = (e, index) => {
     const { name, value, checked } = e.target;
@@ -33,7 +42,7 @@ const QueryParamsTable = ({ onParamsChange }) => {
       .filter((qp) => qp.selected)
       .map((e) => `${e.keyName}=${e.value}`)
       .join('&');
-    onParamsChange(params);
+    dispatch({ type: 'SET_QPARAMS', payload: params });
   };
 
   return (

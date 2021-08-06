@@ -6,7 +6,7 @@ import Playground from './components/playground/Playground';
 import Store, { Context } from './Store';
 
 const AppInterface = () => {
-  const [state] = useContext(Context);
+  const { state } = useContext(Context);
 
   return (
     <div className="App">

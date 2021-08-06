@@ -3,7 +3,7 @@ import { Context } from '../../Store';
 import styles from './playground.module.css';
 
 const RequestBody = () => {
-  const [state] = useContext(Context);
+  const { state } = useContext(Context);
   return (
     <div
       className={

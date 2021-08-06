@@ -8,8 +8,7 @@ import PayloadForm from './PayloadForm';
 import ResponseViewer from './ResponseViewer';
 
 const Playground = () => {
-  const [state] = useContext(Context);
-  const [queryParams, setQueryParams] = useState('');
+  const { state } = useContext(Context);
   const [reqHeaders, setRequestHeaders] = useState([]);
 
   return (
@@ -42,7 +41,7 @@ const Playground = () => {
               </div>
             </div>
           </div>
-          <URLBox params={queryParams} headers={reqHeaders} />
+          <URLBox headers={reqHeaders} />
           <div
             className={
               state.splitView === 'V'
@@ -50,10 +49,7 @@ const Playground = () => {
                 : styles.panel_horizontal
             }
           >
-            <PayloadForm
-              onParamsUpdate={setQueryParams}
-              onHeadersUpdate={setRequestHeaders}
-            />
+            <PayloadForm onHeadersUpdate={setRequestHeaders} />
             <ResponseViewer />
           </div>
         </div>

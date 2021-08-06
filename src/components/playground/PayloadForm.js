@@ -6,8 +6,8 @@ import QueryParamsTable from './QueryParamsTable';
 import RequestBody from './RequestBody';
 import RequestHeadersTable from './RequestHeadersTable';
 
-const PayloadForm = ({ onParamsUpdate, onHeadersUpdate }) => {
-  const [state] = useContext(Context);
+const PayloadForm = ({ onHeadersUpdate }) => {
+  const { state } = useContext(Context);
   const [apiSettings, setApiSettings] = useState('qp');
   return (
     <div className={styles.payload_panel}>
@@ -65,7 +65,7 @@ const PayloadForm = ({ onParamsUpdate, onHeadersUpdate }) => {
       {(() => {
         switch (apiSettings) {
           case 'qp':
-            return <QueryParamsTable onParamsChange={onParamsUpdate} />;
+            return <QueryParamsTable />;
           case 'auth':
             return <AuthHeaders />;
           case 'headers':

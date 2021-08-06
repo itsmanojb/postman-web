@@ -45,9 +45,9 @@ const AutoGrowInput = forwardRef((props, ref) => {
       }}
     >
       <input
-        value={props.value}
         ref={inputRef}
         placeholder="http://example.com"
+        value={props.value}
         onChange={(event) => props.onChange(event.target.value)}
         style={{
           gridArea: '1 / 1 / 2 / 2',
@@ -69,18 +69,21 @@ const AutoGrowInput = forwardRef((props, ref) => {
   );
 });
 
-const URLBox = ({ headers, params }) => {
-  const [state, dispatch] = useContext(Context);
+const URLBox = ({ headers }) => {
+  const { state, dispatch } = useContext(Context);
 
-  const [url, setUrl] = useState('');
-  const [method, setMethod] = useState('');
-  const [btnDisabled, setBtnDisabled] = useState(true);
+  const [url, setUrl] = useState(state.formData.url);
+  const [method, setMethod] = useState(state.formData.method);
+  const [btnDisabled, setBtnDisabled] = useState(
+    state.formData.url.length === 0
+  );
 
   const inputboxRef = useRef();
 
   const handleChange = (e) => {
     setBtnDisabled(e.length <= 0);
     if (method === '') setMethod('GET');
+    dispatch({ type: 'SET_URL', payload: e });
     setUrl(e);
   };
 
@@ -88,13 +91,22 @@ const URLBox = ({ headers, params }) => {
     e.preventDefault();
     if (!method || !url) return;
 
+    const fullUrl = state.formData.params
+      ? `${url}?${state.formData.params}`
+      : url;
     if (!state.responseUI) {
       dispatch({ type: 'SHOW_RESPONSE_UI' });
     }
-    dispatch({ type: 'SET_FORM_SUBMIT', payload: true });
-    const fullUrl = params ? `${url}?${params}` : url;
-    console.log(fullUrl, headers);
-
+    dispatch({
+      type: 'SET_FORM_SUBMIT',
+      payload: {
+        method,
+        url,
+        params: state.formData.params,
+        payload: null,
+      },
+    });
+    // console.log(fullUrl, headers);
     axios({ method, url: fullUrl })
       .catch((e) => e)
       .then((res) => {
@@ -122,11 +134,13 @@ const URLBox = ({ headers, params }) => {
           }}
         >
           <AutoGrowInput
-            ref={inputboxRef}
             value={url}
+            ref={inputboxRef}
             onChange={handleChange}
           />
-          <span>{params ? `?${params}` : ''} </span>
+          <span>
+            {state.formData.params ? `?${state.formData.params}` : ''}{' '}
+          </span>
         </div>
         <button type="submit" disabled={btnDisabled || state.formSubmitted}>
           {state.formSubmitted ? 'Sending...' : 'Send'}

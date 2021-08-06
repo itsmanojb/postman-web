@@ -33,6 +33,13 @@
   --overlay-color: rgba(255, 255, 255, 0.5);
   --blue: rgb(27, 86, 212);
   --input-placeholder: #bbb;
+
+  /* JSON highlights */
+  --string: #538c44;
+  --number: #7f551c;
+  --boolean: #2872a8;
+  --null: #2872a8;
+  --key: #ca4a44;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -56,6 +63,13 @@
     --divider-color: #333;
     --overlay-color: rgba(35, 35, 35, 0.5);
     --input-placeholder: #444;
+
+    /* JSON highlights */
+    --string: #b6765f; /* #91b36c; */
+    --number: #94ae87; /*  #be885c; */
+    --boolean: #be885c;
+    --null: #be885c;
+    --key: #8dd3f9; /* #c75e67 */
   }
 }
 
@@ -126,4 +140,42 @@ ul {
 
 .App main {
   flex: 1;
+}
+
+.pretty_response {
+  padding-inline-start: 5px;
+  font-family: sans-serif;
+  color: var(--text-color);
+  font-size: 14px;
+  line-height: 1.1;
+  /* border-left: 1px solid var(--border-color); */
+}
+
+.pretty_response pre {
+  /* border-left: 1px solid var(--border-color); */
+  margin-block: 0;
+}
+
+.pretty_response pre.wrap {
+  white-space: pre-wrap;
+}
+
+.pretty_response .string {
+  color: var(--string);
+}
+
+.pretty_response .number {
+  color: var(--number);
+}
+
+.pretty_response .boolean {
+  color: var(--boolean);
+}
+
+.pretty_response .null {
+  color: var(--null);
+}
+
+.pretty_response .key {
+  color: var(--key);
 }

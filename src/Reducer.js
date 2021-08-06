@@ -20,10 +20,33 @@ const Reducer = (state, action) => {
         ...state,
         responsePanelMinimized: action.payload,
       };
+    case 'SET_URL':
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          url: action.payload,
+        },
+      };
+    case 'SET_QPARAMS':
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          params: action.payload,
+        },
+      };
     case 'SET_FORM_SUBMIT':
       return {
         ...state,
-        formSubmitted: action.payload,
+        formData: action.payload,
+        formSubmitted: true,
+      };
+    case 'CANCEL_FORM_SUBMIT':
+      return {
+        ...state,
+        formData: null,
+        formSubmitted: false,
       };
     case 'SHOW_RESPONSE_UI':
       return {

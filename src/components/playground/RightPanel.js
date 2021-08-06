@@ -3,7 +3,7 @@ import { Context } from '../../Store';
 import styles from './playground.module.css';
 
 const RightPanel = () => {
-  const [state, dispatch] = useContext(Context);
+  const { dispatch } = useContext(Context);
   const [panelOpen, setPanelOpen] = useState('');
 
   const showPanel = (e) => {

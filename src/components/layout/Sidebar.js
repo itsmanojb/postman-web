@@ -9,7 +9,7 @@ import TabServers from '../tabs/TabServers';
 import { Context } from '../../Store';
 
 const Sidebar = () => {
-  const [state, dispatch] = useContext(Context);
+  const { state, dispatch } = useContext(Context);
   const [selectedTab, setSelectedTab] = useState('collections');
 
   const setCurrentTab = (e) => {

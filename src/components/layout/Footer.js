@@ -3,7 +3,7 @@ import { Context } from '../../Store';
 import styles from './layout.module.css';
 
 const Footer = () => {
-  const [state, dispatch] = useContext(Context);
+  const { state, dispatch } = useContext(Context);
 
   const toggleSplitView = () => {
     dispatch({
