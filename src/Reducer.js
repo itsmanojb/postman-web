@@ -45,7 +45,12 @@ const Reducer = (state, action) => {
     case 'CANCEL_FORM_SUBMIT':
       return {
         ...state,
-        formData: null,
+        formData: {
+          method: '',
+          url: '',
+          params: '',
+          payload: null,
+        },
         formSubmitted: false,
       };
     case 'SHOW_RESPONSE_UI':
@@ -58,6 +63,19 @@ const Reducer = (state, action) => {
         ...state,
         apiResponse: action.payload,
         formSubmitted: false,
+      };
+    case 'RESET_FORM':
+      return {
+        ...state,
+        formData: {
+          method: '',
+          url: '',
+          params: '',
+          payload: null,
+        },
+        formSubmitted: false,
+        responseUI: false,
+        apiResponse: null,
       };
     default:
       break;

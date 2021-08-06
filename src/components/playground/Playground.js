@@ -20,7 +20,7 @@ const Playground = () => {
         <div className={styles.container}>
           <div className={styles.panelheader}>
             <div className={styles.title_area}>
-              <h2>Untitled Request</h2>
+              <h2>{state.formData.url || 'Untitled Request'}</h2>
             </div>
             <div className={styles.options_area}>
               <div className={styles.save_options}>

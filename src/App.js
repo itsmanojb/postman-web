@@ -12,10 +12,14 @@ const AppInterface = () => {
     <div className="App">
       <Header />
       <section>
-        <aside className={state.sideDrawerOpened ? '' : 'collapsed'}>
-          <Sidebar />
-        </aside>
-        <Playground />
+        {state && (
+          <>
+            <aside className={state.sideDrawerOpened ? '' : 'collapsed'}>
+              <Sidebar />
+            </aside>
+            <Playground />
+          </>
+        )}
       </section>
       <Footer />
     </div>

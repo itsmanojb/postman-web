@@ -1,3 +1,4 @@
+// import { useLocalStorage } from '../hooks/useLocalStorage';
 import styles from './tab.module.css';
 import image from '../../images/no-history.png';
 

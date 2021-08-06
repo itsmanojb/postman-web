@@ -40,7 +40,7 @@
 }
 
 .tab {
-  min-width: 120px;
+  min-width: 130px;
   display: flex;
   align-items: center;
   padding-inline: 10px;
@@ -55,7 +55,8 @@
   text-overflow: ellipsis;
   font-size: 13px;
   color: var(--text-color);
-  max-width: calc(100% - 40px);
+  /* max-width: calc(100% - 40px); */
+  max-width: 160px;
 }
 
 .tab button {
