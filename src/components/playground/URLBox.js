@@ -1,8 +1,22 @@
-import { useContext, useState } from 'react';
+import {
+  forwardRef,
+  useContext,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
+import axios from 'axios';
 import { Context } from '../../Store';
 import styles from './playground.module.css';
 
-function AutoGrowInput({ value, onChange }) {
+const AutoGrowInput = forwardRef((props, ref) => {
+  const inputRef = useRef();
+  useImperativeHandle(ref, () => ({
+    focus() {
+      inputRef.current.focus();
+    },
+  }));
+
   return (
     <div
       className="auto-grow-input"
@@ -14,9 +28,10 @@ function AutoGrowInput({ value, onChange }) {
       }}
     >
       <input
-        value={value}
+        value={props.value}
+        ref={inputRef}
         placeholder="http://example.com"
-        onChange={(event) => onChange(event.target.value)}
+        onChange={(event) => props.onChange(event.target.value)}
         style={{
           gridArea: '1 / 1 / 2 / 2',
           width: '100%',
@@ -31,37 +46,56 @@ function AutoGrowInput({ value, onChange }) {
           visibility: 'hidden',
         }}
       >
-        {value}
+        {props.value}
       </span>
     </div>
   );
-}
+});
 
 const URLBox = ({ headers, params }) => {
   const [state, dispatch] = useContext(Context);
 
-  const [value, setValue] = useState('');
+  const [url, setUrl] = useState('');
+  const [method, setMethod] = useState('');
   const [btnDisabled, setBtnDisabled] = useState(true);
+
+  const inputboxRef = useRef();
 
   const handleChange = (e) => {
     setBtnDisabled(e.length <= 0);
-    setValue(e);
+    setUrl(e);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!method || !url) return;
+
     if (!state.responseUI) {
       dispatch({ type: 'SHOW_RESPONSE_UI' });
     }
     dispatch({ type: 'SET_FORM_SUBMIT', payload: true });
-    const apiURL = params ? `${value}?${params}` : value;
-    console.log(apiURL, headers);
+    const fullUrl = params ? `${url}?${params}` : url;
+    console.log(fullUrl, headers);
+
+    axios({ method, url: fullUrl })
+      .then((res) => {
+        dispatch({
+          type: 'SET_API_RESPONSE',
+          payload: { success: true, data: res, err: null },
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: 'SET_API_RESPONSE',
+          payload: { success: false, data: null, err },
+        });
+      });
   };
 
   return (
     <div className={styles.url_box}>
       <form onSubmit={handleSubmit}>
-        <select>
+        <select value={method} onChange={(e) => setMethod(e.target.value)}>
           <option value="">Select</option>
           <option value="GET">GET</option>
           <option value="POST">POST</option>
@@ -69,8 +103,16 @@ const URLBox = ({ headers, params }) => {
           <option value="PATCH">PATCH</option>
           <option value="DELETE">DELETE</option>
         </select>
-        <div>
-          <AutoGrowInput value={value} onChange={handleChange} />
+        <div
+          onClick={() => {
+            inputboxRef.current.focus();
+          }}
+        >
+          <AutoGrowInput
+            ref={inputboxRef}
+            value={url}
+            onChange={handleChange}
+          />
           <span>{params ? `?${params}` : ''} </span>
         </div>
         <button type="submit" disabled={btnDisabled || state.formSubmitted}>

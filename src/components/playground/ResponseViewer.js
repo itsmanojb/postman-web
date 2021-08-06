@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { Context } from '../../Store';
 import styles from './playground.module.css';
 import ResponseWrapper from './response/ResponseWrapper';

@@ -34,6 +34,7 @@ const Reducer = (state, action) => {
       return {
         ...state,
         apiResponse: action.payload,
+        formSubmitted: false,
       };
     default:
       break;
