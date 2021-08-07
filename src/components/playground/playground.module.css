@@ -464,7 +464,7 @@
 .payload_types_small {
   display: flex;
   padding-inline: calc(var(--padding) / 2);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-top: 4px;
 }
 
@@ -475,6 +475,7 @@
   padding: 0.25rem 0;
   margin-right: 25px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .payload_tab:hover {
@@ -497,6 +498,7 @@
   overflow-y: auto;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
+  border-top: 1px solid var(--border-color);
 }
 
 .payload_wrapper::-webkit-scrollbar {
@@ -509,6 +511,7 @@
   height: calc(100vh - 301px);
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
+  border-top: 1px solid var(--border-color);
 }
 
 .payload_wrapper_full_v {
@@ -719,12 +722,23 @@
   height: 100%;
   display: grid;
   grid-template-columns: 360px 1fr;
-  border-top: 1px solid var(--border-color);
+}
+
+.auth_two_col_vert {
+  display: grid;
+  grid-template-columns: 1fr;
 }
 
 .auth_left_col {
   border-right: 1px solid var(--border-color);
   padding: 10px 1.5rem;
+}
+
+.auth_left_col_vert {
+  composes: auth_left_col;
+  border-right: 0;
+  padding: 20px 1.5rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .auth_left_col > div:first-of-type {
@@ -771,7 +785,7 @@
   display: flex;
   flex-direction: column;
   margin-block-start: 10px;
-  padding: 20px 1rem;
+  padding: 12px 1.5rem;
 }
 
 .auth_right_col_blank {
@@ -795,7 +809,7 @@
   display: grid;
   align-items: start;
   grid-template-columns: 220px 1fr;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .auth_right_col > div span {
@@ -807,7 +821,8 @@
 }
 
 .auth_right_col > div input,
-.auth_right_col > div textarea {
+.auth_right_col > div textarea,
+.auth_right_col > div select {
   color: var(--text-color);
   font-size: 13px;
   border: 1px solid var(--drawer-border-color);
@@ -825,6 +840,17 @@
   min-height: 60px;
   max-width: 400px;
   min-width: 250px;
+}
+
+.auth_right_col > div select {
+  padding: 9px;
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  background: url('../../images/chevron-down.svg') no-repeat;
+  background-size: 15px;
+  background-position: 97.5% center;
+  width: 268px;
 }
 
 /* Response styles */

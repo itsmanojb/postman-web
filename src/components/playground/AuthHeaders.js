@@ -9,6 +9,11 @@ const AuthHeaders = () => {
   const [bearer, setBearer] = useState('');
   const [authKey, setAuthKey] = useState('');
   const [authValue, setAuthValue] = useState('');
+  const [keyAddto, setKeyAddto] = useState('header');
+
+  const setAuthKeyLocation = (e) => {
+    setKeyAddto(e);
+  };
 
   return (
     <div
@@ -18,8 +23,20 @@ const AuthHeaders = () => {
           : styles.payload_wrapper
       }
     >
-      <div className={styles.auth_two_col}>
-        <div className={styles.auth_left_col}>
+      <div
+        className={
+          state.splitView === 'V'
+            ? styles.auth_two_col_vert
+            : styles.auth_two_col
+        }
+      >
+        <div
+          className={
+            state.splitView === 'V'
+              ? styles.auth_left_col_vert
+              : styles.auth_left_col
+          }
+        >
           <div>
             <span>Type</span>
             <select
@@ -87,6 +104,18 @@ const AuthHeaders = () => {
                     value={authValue}
                     onChange={(e) => setAuthValue(e.target.value)}
                   />
+                </div>
+              </div>
+              <div>
+                <span>Add to</span>
+                <div>
+                  <select
+                    value={keyAddto}
+                    onChange={(e) => setAuthKeyLocation(e.target.value)}
+                  >
+                    <option value="header">Header</option>
+                    <option value="qp">Query Params</option>
+                  </select>
                 </div>
               </div>
             </>
