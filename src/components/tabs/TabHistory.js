@@ -35,14 +35,17 @@ const UrlList = ({ items }) => {
     <div className={styles.history_list}>
       {listItems.map((group, i) => (
         <div className={styles.history_group} key={`req-history-group-${i}`}>
-          <details>
+          <details open>
             <summary>{group.date}</summary>
             <div>
               <ul>
                 {group.requests.map((req, j) => {
                   const item = req.split(' : ')[1];
                   return (
-                    <li key={`req-history-item-${i}-${j}`}>
+                    <li
+                      key={`req-history-item-${i}-${j}`}
+                      title={item.split(' ')[1]}
+                    >
                       <span>{item.split(' ')[0]}</span>
                       {item.split(' ')[1]}
                     </li>

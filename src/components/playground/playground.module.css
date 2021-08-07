@@ -713,6 +713,120 @@
   background-color: var(--td-input-focus-bg);
 }
 
+/* Auth headers styles */
+
+.auth_two_col {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  border-top: 1px solid var(--border-color);
+}
+
+.auth_left_col {
+  border-right: 1px solid var(--border-color);
+  padding: 10px 1.5rem;
+}
+
+.auth_left_col > div:first-of-type {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block-start: 10px;
+}
+
+.auth_left_col > div:first-of-type span {
+  color: var(--text-color);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.auth_left_col > div:first-of-type select {
+  border: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 3px;
+  font-family: inherit;
+  background: var(--light-bg) url('../../images/chevron-down.svg') no-repeat;
+  background-size: 15px;
+  background-position: 95% center;
+  padding: 10px 20px 10px 10px;
+  cursor: pointer;
+  font-size: 12.5px;
+  color: var(--text-color);
+  width: 130px;
+}
+
+.auth_left_col p {
+  font-size: 12.5px;
+  color: var(--text-color);
+  line-height: 1.5;
+  margin-block: 1rem;
+}
+
+.auth_left_col p span {
+  color: var(--blue);
+}
+
+.auth_right_col {
+  display: flex;
+  flex-direction: column;
+  margin-block-start: 10px;
+  padding: 20px 1rem;
+}
+
+.auth_right_col_blank {
+  display: grid;
+  place-content: center;
+}
+
+.auth_right_col_blank p {
+  font-size: 13px;
+  color: var(--text-color);
+  line-height: 1.5;
+  margin-block: 1rem;
+}
+
+.auth_right_col_blank p span {
+  color: var(--blue);
+  margin-left: 2px;
+}
+
+.auth_right_col > div {
+  display: grid;
+  align-items: start;
+  grid-template-columns: 220px 1fr;
+  margin-bottom: 1rem;
+}
+
+.auth_right_col > div span {
+  color: var(--text-color);
+  font-size: 13px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.auth_right_col > div input,
+.auth_right_col > div textarea {
+  color: var(--text-color);
+  font-size: 13px;
+  border: 1px solid var(--drawer-border-color);
+  border-radius: 4px;
+  width: 250px;
+}
+
+.auth_right_col > div input {
+  padding: 8px;
+}
+
+.auth_right_col > div textarea {
+  padding: 4px;
+  max-height: 100px;
+  min-height: 60px;
+  max-width: 400px;
+  min-width: 250px;
+}
+
 /* Response styles */
 
 .response_panel {
