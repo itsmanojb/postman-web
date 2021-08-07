@@ -5,6 +5,11 @@ const Reducer = (state, action) => {
         ...state,
         sideDrawerOpened: action.payload,
       };
+    case 'SET_SIDEDRAWER_TAB':
+      return {
+        ...state,
+        sideDrawerTab: action.payload,
+      };
     case 'SET_INFOPANEL':
       return {
         ...state,

@@ -3,6 +3,7 @@ import Reducer from './Reducer';
 
 const initialState = {
   sideDrawerOpened: false,
+  sideDrawerTab: 'history',
   infoPanelOpened: false,
   splitView: 'H',
   responsePanelMinimized: false,

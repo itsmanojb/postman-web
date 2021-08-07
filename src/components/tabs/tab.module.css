@@ -29,3 +29,56 @@
   font-size: 13px;
   font-weight: 500;
 }
+
+.history_list {
+  padding-block: 10px;
+  overflow-x: hidden;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+}
+
+.history_list::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.history_group {
+}
+
+.history_group details {
+}
+
+.history_group details summary {
+  font-size: 14px;
+  color: var(--text-color);
+  font-family: var(--font);
+  padding-inline: 10px;
+}
+.history_group details > div {
+  overflow: hidden;
+}
+.history_group details ul {
+  overflow: hidden;
+  padding-block: 4px;
+}
+
+.history_group details ul li {
+  font-size: 14px;
+  color: var(--text-color-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 9px 10px 9px 26px;
+  cursor: pointer;
+  margin-block: 1px;
+}
+
+.history_group details ul li:hover {
+  background-color: var(--drawer-hover-color);
+}
+
+.history_group details ul li span {
+  margin-right: 6px;
+  font-size: 12px;
+  color: rgb(42, 177, 119);
+}

@@ -7,7 +7,7 @@ import URLBox from './URLBox';
 import PayloadForm from './PayloadForm';
 import ResponseViewer from './ResponseViewer';
 
-const Playground = () => {
+const Playground = ({ triggerSubmit }) => {
   const { state } = useContext(Context);
   const [reqHeaders, setRequestHeaders] = useState([]);
 
@@ -41,7 +41,7 @@ const Playground = () => {
               </div>
             </div>
           </div>
-          <URLBox headers={reqHeaders} />
+          <URLBox headers={reqHeaders} onSubmit={triggerSubmit} />
           <div
             className={
               state.splitView === 'V'

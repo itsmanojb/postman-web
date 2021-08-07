@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import Footer from './components/layout/Footer';
 import Header from './components/layout/Header';
 import Sidebar from './components/layout/Sidebar';
@@ -7,6 +7,7 @@ import Store, { Context } from './Store';
 
 const AppInterface = () => {
   const { state } = useContext(Context);
+  const [refresh, refreshHistory] = useState(null);
 
   return (
     <div className="App">
@@ -15,9 +16,9 @@ const AppInterface = () => {
         {state && (
           <>
             <aside className={state.sideDrawerOpened ? '' : 'collapsed'}>
-              <Sidebar />
+              <Sidebar refresh={refresh} />
             </aside>
-            <Playground />
+            <Playground triggerSubmit={refreshHistory} />
           </>
         )}
       </section>

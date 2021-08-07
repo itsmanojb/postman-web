@@ -217,7 +217,8 @@
 }
 
 .button_selected {
-  background-color: var(--tabgroup-bg-selected) !important;
+  color: var(--theme-color) !important;
+  /* background-color: var(--tabgroup-bg-selected) !important; */
 }
 
 .tab_group select {

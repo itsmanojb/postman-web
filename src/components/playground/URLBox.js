@@ -70,9 +70,9 @@ const AutoGrowInput = forwardRef((props, ref) => {
   );
 });
 
-const URLBox = ({ headers }) => {
+const URLBox = ({ headers, onSubmit }) => {
   const { state, dispatch } = useContext(Context);
-  const [requestUrls, setRequestUrl] = useLocalStorage('_post_man_history', []);
+  const [requestUrls] = useLocalStorage('_post_man_history', []);
 
   const [url, setUrl] = useState(state.formData.url);
   const [method, setMethod] = useState(state.formData.method);
@@ -112,12 +112,8 @@ const URLBox = ({ headers }) => {
     axios({ method, url: fullUrl })
       .catch((e) => e)
       .then((res) => {
-        let urlArr = [...requestUrls];
-        urlArr.unshift(`${new Date().getTime()} : ${method} ${fullUrl}`);
-        if (urlArr.length > 50) {
-          urlArr.pop();
-        }
-        setRequestUrl(urlArr);
+        const reqUrl = `${new Date().getTime()} : ${method} ${fullUrl}`;
+        onSubmit(reqUrl);
         dispatch({
           type: 'SET_API_RESPONSE',
           payload: { ...res },

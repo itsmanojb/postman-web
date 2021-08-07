@@ -144,7 +144,7 @@ ul {
 
 .pretty_response {
   padding-inline-start: 5px;
-  font-family: sans-serif;
+  font-family: 'Courier New', Courier, monospace;
   color: var(--text-color);
   font-size: 14px;
   line-height: 1.1;

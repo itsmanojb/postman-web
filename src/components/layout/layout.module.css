@@ -207,8 +207,9 @@
 }
 
 .sidebar_tabs {
-  display: flex;
-  flex: 1;
+  display: grid;
+  grid-template-columns: 90px calc(var(--sidebar-width) - 90px);
+  overflow-x: hidden;
 }
 
 .sidebar_tab_buttons {
@@ -284,7 +285,7 @@
 }
 
 .sidebar_tab_panels {
-  flex: 1;
+  /* flex: 1; */
 }
 
 /* Footer */

@@ -8,13 +8,14 @@ import TabMonitors from '../tabs/TabMonitors';
 import TabServers from '../tabs/TabServers';
 import { Context } from '../../Store';
 
-const Sidebar = () => {
+const Sidebar = ({ refresh }) => {
   const { state, dispatch } = useContext(Context);
-  const [selectedTab, setSelectedTab] = useState('collections');
+  const [selectedTab, setSelectedTab] = useState(state.sideDrawerTab);
 
   const setCurrentTab = (e) => {
     setSelectedTab(e);
     dispatch({ type: 'SET_SIDEDRAWER', payload: true });
+    dispatch({ type: 'SET_SIDEDRAWER_TAB', payload: e });
   };
 
   return (
@@ -139,7 +140,7 @@ const Sidebar = () => {
                 case 'monitors':
                   return <TabMonitors />;
                 case 'history':
-                  return <TabHistory />;
+                  return <TabHistory update={refresh} />;
                 default:
                   return <TabCollections />;
               }
