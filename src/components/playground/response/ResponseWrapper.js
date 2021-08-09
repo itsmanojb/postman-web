@@ -169,7 +169,7 @@ const ResponseWrapper = () => {
                   <button>
                     <i className="feather-copy"></i>
                   </button>
-                  <button>
+                  <button disabled>
                     <i className="feather-search"></i>
                   </button>
                 </div>

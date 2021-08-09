@@ -142,6 +142,10 @@ ul {
   flex: 1;
 }
 
+#prettyJsonOutput {
+  width: 100% !important;
+}
+
 .pretty_response {
   padding-inline-start: 5px;
   font-family: 'Courier New', Courier, monospace;

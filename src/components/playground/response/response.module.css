@@ -175,6 +175,11 @@
   color: var(--text-color);
 }
 
+.resp_action button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .tabs {
   display: flex;
   align-items: center;

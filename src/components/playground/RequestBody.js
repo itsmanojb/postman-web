@@ -1,10 +1,12 @@
 import { useContext, useState } from 'react';
 import { Context } from '../../Store';
 import styles from './playground.module.css';
+import RawPayload from './RawPayload';
 
 const RequestBody = () => {
   const { state } = useContext(Context);
   const [bodyType, setBodyType] = useState('');
+  const [rawBodyType, setRawBodyType] = useState('json');
 
   const handleChange = (event) => {
     setBodyType(event.target.value);
@@ -91,19 +93,23 @@ const RequestBody = () => {
         </label>
         {bodyType === 'raw' && (
           <div className={styles.raw_body_options}>
-            <select className={styles.raw_body_formats}>
-              <option value="json">JSON</option>
-              <option value="xml" disabled>
-                XML
-              </option>
-              <option value="html" disabled>
-                HTML
-              </option>
+            <select
+              className={styles.raw_body_formats}
+              value={rawBodyType}
+              onChange={(e) => setRawBodyType(e.target.value)}
+            >
               <option value="text" disabled>
                 Text
               </option>
               <option value="auto" disabled>
-                Auto
+                Javascript
+              </option>
+              <option value="json">JSON</option>
+              <option value="html" disabled>
+                HTML
+              </option>
+              <option value="xml" disabled>
+                XML
               </option>
             </select>
             <span role="button" className={styles.beautify_btn}>
@@ -121,7 +127,11 @@ const RequestBody = () => {
         {bodyType === 'form-data' && (
           <div className={styles.no_body_panel}>form data</div>
         )}
-        {bodyType === 'raw' && <div className={styles.no_body_panel}>Raw</div>}
+        {bodyType === 'raw' && (
+          <div className={styles.raw_body_panel}>
+            <RawPayload mode={rawBodyType} />
+          </div>
+        )}
       </div>
     </div>
   );

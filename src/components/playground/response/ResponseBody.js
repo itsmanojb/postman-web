@@ -1,6 +1,11 @@
+import { useEffect, useState } from 'react';
+import AceEditor from 'react-ace';
+import 'ace-builds/src-noconflict/mode-json';
+import 'ace-builds/src-noconflict/theme-tomorrow';
+import 'ace-builds/src-noconflict/theme-twilight';
 import style from './response.module.css';
 
-function syntaxHighlight(json) {
+/* function syntaxHighlight(json) {
   if (typeof json != 'string') {
     json = JSON.stringify(json, undefined, 2);
   }
@@ -28,9 +33,20 @@ function syntaxHighlight(json) {
       return '<span class="' + cls + '">' + match + '</span>';
     }
   );
-}
+} */
 
 const ResponseBody = ({ data, viewAs, wrap }) => {
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    if (
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    ) {
+      setDark(true);
+    }
+  }, []);
+
   return (
     <div className={style.response_body}>
       {viewAs === 'preview' && (
@@ -43,10 +59,24 @@ const ResponseBody = ({ data, viewAs, wrap }) => {
       )}
       {viewAs === 'pretty' && (
         <div className="pretty_response">
-          <pre
+          {/* <pre
             className={wrap ? 'wrap' : ''}
             dangerouslySetInnerHTML={{ __html: syntaxHighlight(data) }}
-          ></pre>
+          ></pre> */}
+          <AceEditor
+            mode="json"
+            fontSize={13}
+            theme={dark ? 'twilight' : 'tomorrow'}
+            value={JSON.stringify(data, null, 2)}
+            name="prettyJsonOutput"
+            tabSize={2}
+            editorProps={{
+              $blockScrolling: true,
+            }}
+            readOnly={true}
+            wrapEnabled={wrap}
+            highlightActiveLine={false}
+          />
         </div>
       )}
     </div>
