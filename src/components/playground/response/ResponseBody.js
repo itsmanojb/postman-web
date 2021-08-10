@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/mode-json';
+import 'ace-builds/src-noconflict/mode-html';
 import 'ace-builds/src-noconflict/theme-tomorrow';
 import 'ace-builds/src-noconflict/theme-twilight';
 import style from './response.module.css';
@@ -38,6 +39,8 @@ import style from './response.module.css';
 const ResponseBody = ({ data, viewAs, wrap }) => {
   const [dark, setDark] = useState(false);
 
+  console.log();
+
   useEffect(() => {
     if (
       window.matchMedia &&
@@ -50,11 +53,19 @@ const ResponseBody = ({ data, viewAs, wrap }) => {
   return (
     <div className={style.response_body}>
       {viewAs === 'preview' && (
-        <div className={style.res_preview}>{JSON.stringify(data)}</div>
+        <>
+          {typeof data === 'object' ? (
+            <div className={style.res_preview}>JSON.stringify(data)</div>
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: data }}></div>
+          )}
+        </>
       )}
       {viewAs === 'raw' && (
         <div className={style.res_raw}>
-          <pre>{JSON.stringify(data, null, 2)}</pre>
+          <pre>
+            {typeof data === 'object' ? JSON.stringify(data, null, 2) : data}
+          </pre>
         </div>
       )}
       {viewAs === 'pretty' && (
@@ -63,20 +74,37 @@ const ResponseBody = ({ data, viewAs, wrap }) => {
             className={wrap ? 'wrap' : ''}
             dangerouslySetInnerHTML={{ __html: syntaxHighlight(data) }}
           ></pre> */}
-          <AceEditor
-            mode="json"
-            fontSize={13}
-            theme={dark ? 'twilight' : 'tomorrow'}
-            value={JSON.stringify(data, null, 2)}
-            name="prettyJsonOutput"
-            tabSize={2}
-            editorProps={{
-              $blockScrolling: true,
-            }}
-            readOnly={true}
-            wrapEnabled={wrap}
-            highlightActiveLine={false}
-          />
+          {typeof data === 'object' ? (
+            <AceEditor
+              mode="json"
+              fontSize={13}
+              theme={dark ? 'twilight' : 'tomorrow'}
+              value={JSON.stringify(data, null, 2)}
+              name="prettyJsonOutput"
+              tabSize={2}
+              editorProps={{
+                $blockScrolling: true,
+              }}
+              readOnly={true}
+              wrapEnabled={wrap}
+              highlightActiveLine={false}
+            />
+          ) : (
+            <AceEditor
+              mode="html"
+              fontSize={13}
+              theme={dark ? 'twilight' : 'tomorrow'}
+              value={data}
+              name="prettyJsonOutput"
+              tabSize={2}
+              editorProps={{
+                $blockScrolling: true,
+              }}
+              readOnly={true}
+              wrapEnabled={wrap}
+              highlightActiveLine={false}
+            />
+          )}
         </div>
       )}
     </div>

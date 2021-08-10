@@ -889,6 +889,7 @@
 
 .disabled_radio {
   cursor: default !important;
+  opacity: 0.5;
 }
 
 .inline_radios label input {
@@ -904,6 +905,7 @@
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
+  background: transparent;
 }
 
 .raw_body_options {
@@ -919,7 +921,9 @@
   font-size: 13px;
   font-family: var(--font);
   font-weight: 500;
-  cursor: pointer;
+  /* cursor: pointer; */
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 .no_body_panel {

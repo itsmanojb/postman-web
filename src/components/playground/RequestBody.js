@@ -5,7 +5,7 @@ import RawPayload from './RawPayload';
 
 const RequestBody = () => {
   const { state } = useContext(Context);
-  const [bodyType, setBodyType] = useState('');
+  const [bodyType, setBodyType] = useState(state.formData.payload ? 'raw' : '');
   const [rawBodyType, setRawBodyType] = useState('json');
 
   const handleChange = (event) => {

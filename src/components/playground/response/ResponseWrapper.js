@@ -49,7 +49,7 @@ const ResponseWrapper = () => {
           </div>
         </>
       )}
-      {state.apiResponse && (
+      {JSON.stringify(state.apiResponse) !== '{}' ? (
         <div
           className={
             state.splitView === 'V' ? style.wrapper_full : style.wrapper
@@ -68,6 +68,7 @@ const ResponseWrapper = () => {
                 >
                   Body
                 </li>
+                <li className={style.payload_tab_disabled}>Cookies</li>
                 <li
                   onClick={(e) => setRespView('headers')}
                   className={
@@ -77,20 +78,22 @@ const ResponseWrapper = () => {
                   }
                 >
                   Headers{' '}
-                  {state.apiResponse && (
+                  {state.apiResponse.headers && (
                     <span>
                       ({Object.entries(state.apiResponse.headers).length})
                     </span>
                   )}
                 </li>
-
-                <li className={style.payload_tab_disabled}>Cookies</li>
                 <li className={style.payload_tab_disabled}>Test results</li>
               </ul>
               <div className={style.resp_meta}>
                 <i className="feather-globe"></i>
                 <div>
-                  Status: <span>{state.apiResponse.status}</span>
+                  Status:{' '}
+                  <span>
+                    {state.apiResponse.status}{' '}
+                    <em>{state.apiResponse.statusText}</em>{' '}
+                  </span>
                 </div>
                 <div>
                   Time: <span>{state.apiResponse.customData.time}ms</span>
@@ -200,6 +203,8 @@ const ResponseWrapper = () => {
             })()}
           </div>
         </div>
+      ) : (
+        <div></div>
       )}
     </>
   );

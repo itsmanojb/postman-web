@@ -41,6 +41,14 @@ const Reducer = (state, action) => {
           params: action.payload,
         },
       };
+    case 'SET_PAYLOAD':
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          payload: action.payload,
+        },
+      };
     case 'SET_FORM_SUBMIT':
       return {
         ...state,
@@ -58,10 +66,10 @@ const Reducer = (state, action) => {
         },
         formSubmitted: false,
       };
-    case 'SHOW_RESPONSE_UI':
+    case 'SET_RESPONSE_UI':
       return {
         ...state,
-        responseUI: true,
+        responseUI: action.payload,
       };
     case 'SET_API_RESPONSE':
       return {
@@ -80,7 +88,7 @@ const Reducer = (state, action) => {
         },
         formSubmitted: false,
         responseUI: false,
-        apiResponse: null,
+        apiResponse: {},
       };
     default:
       break;

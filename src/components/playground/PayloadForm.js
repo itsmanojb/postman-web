@@ -8,7 +8,9 @@ import RequestHeadersTable from './RequestHeadersTable';
 
 const PayloadForm = ({ onHeadersUpdate }) => {
   const { state } = useContext(Context);
-  const [apiSettings, setApiSettings] = useState('qp');
+  const [apiSettings, setApiSettings] = useState(
+    state.formData.payload ? 'body' : 'qp'
+  );
   return (
     <div className={styles.payload_panel}>
       <ul

@@ -7,7 +7,7 @@ import {
 } from 'react';
 import axios from 'axios';
 import { Context } from '../../Store';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+// import { useLocalStorage } from '../hooks/useLocalStorage';
 import styles from './playground.module.css';
 
 axios.interceptors.request.use((request) => {
@@ -72,7 +72,7 @@ const AutoGrowInput = forwardRef((props, ref) => {
 
 const URLBox = ({ headers, onSubmit }) => {
   const { state, dispatch } = useContext(Context);
-  const [requestUrls] = useLocalStorage('_post_man_history', []);
+  // const [requestUrls] = useLocalStorage('_post_man_history', []);
 
   const [url, setUrl] = useState(state.formData.url);
   const [method, setMethod] = useState(state.formData.method);
@@ -97,7 +97,7 @@ const URLBox = ({ headers, onSubmit }) => {
       ? `${url}?${state.formData.params}`
       : url;
     if (!state.responseUI) {
-      dispatch({ type: 'SHOW_RESPONSE_UI' });
+      dispatch({ type: 'SET_RESPONSE_UI', payload: true });
     }
     dispatch({
       type: 'SET_FORM_SUBMIT',
@@ -105,19 +105,24 @@ const URLBox = ({ headers, onSubmit }) => {
         method,
         url,
         params: state.formData.params,
-        payload: null,
+        payload: state.formData.payload,
       },
     });
-    // console.log(fullUrl, headers);
-    axios({ method, url: fullUrl })
+    axios({
+      method,
+      url: fullUrl,
+      data: JSON.parse(state.formData.payload),
+    })
       .catch((e) => e)
       .then((res) => {
-        const reqUrl = `${new Date().getTime()} : ${method} ${fullUrl}`;
-        onSubmit(reqUrl);
+        console.log(res);
         dispatch({
           type: 'SET_API_RESPONSE',
-          payload: { ...res },
+          payload: res,
         });
+        const reqUrl = `${new Date().getTime()} : ${method} ${fullUrl}`;
+        console.log(state);
+        onSubmit(reqUrl);
       });
   };
 

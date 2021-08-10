@@ -15,7 +15,7 @@ const initialState = {
   },
   formSubmitted: false,
   responseUI: false,
-  apiResponse: null,
+  apiResponse: {},
 };
 const localState = JSON.parse(localStorage.getItem('_post_man'));
 const Store = ({ children }) => {
