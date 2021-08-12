@@ -13,10 +13,15 @@ const initialState = {
     params: '',
     payload: null,
   },
+  auth: '',
+  authHeader: '',
+  authLocation: 'header',
+  requestHeaders: [],
   formSubmitted: false,
   responseUI: false,
   apiResponse: {},
 };
+
 const localState = JSON.parse(localStorage.getItem('_post_man'));
 const Store = ({ children }) => {
   const [state, dispatch] = useReducer(Reducer, localState || initialState);

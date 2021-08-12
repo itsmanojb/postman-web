@@ -68,7 +68,7 @@ const RequestHeadersTable = ({ onHeadersChange }) => {
         <tbody>
           {inputList.map((x, i) => (
             <>
-              <tr key={`qp-input-row-${i}`}>
+              <tr key={`reqh-input-row-${i}`}>
                 <td>
                   <input
                     type="checkbox"
@@ -107,7 +107,7 @@ const RequestHeadersTable = ({ onHeadersChange }) => {
                 </td>
               </tr>
               {inputList.length - 1 === i && (
-                <tr key="new-input-x">
+                <tr key="reqh-new-input-x">
                   <td colSpan={4} className={styles.add_td}>
                     <button onClick={handleAddClick}>
                       <i className="feather-plus"></i>

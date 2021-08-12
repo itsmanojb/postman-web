@@ -836,6 +836,7 @@
   border: 1px solid var(--drawer-border-color);
   border-radius: 4px;
   width: 250px;
+  background-color: var(--bg-color);
 }
 
 .auth_right_col > div input {
@@ -848,6 +849,7 @@
   min-height: 60px;
   max-width: 400px;
   min-width: 250px;
+  background-color: var(--bg-color);
 }
 
 .auth_right_col > div select {

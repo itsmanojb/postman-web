@@ -3,16 +3,52 @@ import { Context } from '../../Store';
 import styles from './playground.module.css';
 
 const AuthHeaders = () => {
-  const { state } = useContext(Context);
+  const { state, dispatch } = useContext(Context);
 
-  const [authType, setAuthType] = useState('');
-  const [bearer, setBearer] = useState('');
-  const [authKey, setAuthKey] = useState('');
-  const [authValue, setAuthValue] = useState('');
-  const [keyAddto, setKeyAddto] = useState('header');
+  const [bearer, setBearer] = useState(() => {
+    if (state.auth === 'bearer') {
+      return state.authHeader.split(':')[1].split(' ')[1] || '';
+    }
+    return '';
+  });
+  const [authKey, setAuthKey] = useState(() => {
+    if (state.auth === 'apiKey') {
+      return state.authHeader.split(':')[0];
+    }
+    return '';
+  });
+  const [authValue, setAuthValue] = useState(() => {
+    if (state.auth === 'apiKey') {
+      return state.authHeader.split(':')[1] || '';
+    }
+    return '';
+  });
 
-  const setAuthKeyLocation = (e) => {
-    setKeyAddto(e);
+  const setAuthHeader = (key, e) => {
+    if (key === 'bearer') {
+      setBearer(e);
+      dispatch({
+        type: 'SET_AUTH_HEADER',
+        payload: `Authorization:Bearer ${e}`,
+      });
+    } else {
+      if (key === 'authKey') {
+        setAuthKey(e);
+        dispatch({
+          type: 'SET_AUTH_HEADER',
+          payload: `${e}:${authValue}`,
+        });
+      }
+      if (key === 'authValue') {
+        setAuthValue(e);
+        if (authKey) {
+          dispatch({
+            type: 'SET_AUTH_HEADER',
+            payload: `${authKey}:${e}`,
+          });
+        }
+      }
+    }
   };
 
   return (
@@ -40,8 +76,10 @@ const AuthHeaders = () => {
           <div>
             <span>Type</span>
             <select
-              value={authType}
-              onChange={(e) => setAuthType(e.target.value)}
+              value={state.auth}
+              onChange={(e) =>
+                dispatch({ type: 'SET_AUTH', payload: e.target.value })
+              }
             >
               <option value="">No Auth</option>
               <option value="bearer">Bearer Token</option>
@@ -54,7 +92,7 @@ const AuthHeaders = () => {
               <option disabled>AWS Signature</option>
             </select>
           </div>
-          {authType !== '' && (
+          {state.auth !== '' && (
             <p>
               The authorization header will be automatically generated when you
               send the request.
@@ -64,36 +102,36 @@ const AuthHeaders = () => {
         </div>
         <div
           className={
-            authType === ''
+            state.auth === ''
               ? styles.auth_right_col_blank
               : styles.auth_right_col
           }
         >
-          {authType === '' && (
+          {state.auth === '' && (
             <p>
               This request does not use any authorization.
               <span>Learn more about authorization</span>
             </p>
           )}
-          {authType === 'bearer' && (
+          {state.auth === 'bearer' && (
             <div>
               <span>Token</span>
               <div>
                 <textarea
                   value={bearer}
-                  onChange={(e) => setBearer(e.target.value)}
+                  onChange={(e) => setAuthHeader('bearer', e.target.value)}
                 />
               </div>
             </div>
           )}
-          {authType === 'apiKey' && (
+          {state.auth === 'apiKey' && (
             <>
               <div>
                 <span>Key</span>
                 <div>
                   <input
                     value={authKey}
-                    onChange={(e) => setAuthKey(e.target.value)}
+                    onChange={(e) => setAuthHeader('authKey', e.target.value)}
                   />
                 </div>
               </div>
@@ -102,7 +140,7 @@ const AuthHeaders = () => {
                 <div>
                   <input
                     value={authValue}
-                    onChange={(e) => setAuthValue(e.target.value)}
+                    onChange={(e) => setAuthHeader('authValue', e.target.value)}
                   />
                 </div>
               </div>
@@ -110,8 +148,13 @@ const AuthHeaders = () => {
                 <span>Add to</span>
                 <div>
                   <select
-                    value={keyAddto}
-                    onChange={(e) => setAuthKeyLocation(e.target.value)}
+                    value={state.authLocation}
+                    onChange={(e) =>
+                      dispatch({
+                        type: 'SET_AUTH_LOCATION',
+                        payload: e.target.value,
+                      })
+                    }
                   >
                     <option value="header">Header</option>
                     <option value="qp">Query Params</option>

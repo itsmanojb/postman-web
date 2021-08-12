@@ -119,7 +119,7 @@ const QueryParamsTable = () => {
                 </td>
               </tr>
               {inputList.length - 1 === i && (
-                <tr key="new-input-x">
+                <tr key="qp-new-input-x">
                   <td colSpan={4} className={styles.add_td}>
                     <button onClick={handleAddClick}>
                       <i className="feather-plus"></i>

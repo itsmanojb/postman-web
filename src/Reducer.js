@@ -41,6 +41,27 @@ const Reducer = (state, action) => {
           params: action.payload,
         },
       };
+    case 'SET_AUTH':
+      return {
+        ...state,
+        auth: action.payload,
+        authHeader: '',
+      };
+    case 'SET_AUTH_LOCATION':
+      return {
+        ...state,
+        authLocation: action.payload,
+      };
+    case 'SET_AUTH_HEADER':
+      return {
+        ...state,
+        authHeader: action.payload,
+      };
+    case 'SET_REQUEST_HEADERS':
+      return {
+        ...state,
+        requestHeaders: action.payload,
+      };
     case 'SET_PAYLOAD':
       return {
         ...state,
@@ -86,6 +107,10 @@ const Reducer = (state, action) => {
           params: '',
           payload: null,
         },
+        auth: '',
+        authHeader: '',
+        authLocation: 'header',
+        requestHeaders: [],
         formSubmitted: false,
         responseUI: false,
         apiResponse: {},
