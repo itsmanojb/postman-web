@@ -1,9 +1,20 @@
 import { useContext, useState } from 'react';
 import { Context } from '../../Store';
 import styles from './playground.module.css';
+import style from './authHeader.module.css';
 
 const RequestHeadersTable = ({ onHeadersChange }) => {
-  const { state } = useContext(Context);
+  const { state, dispatch } = useContext(Context);
+  const [authHeader] = useState(() => {
+    if (state.authLocation === 'header') {
+      const header = state.authHeader.split(':');
+      console.log('header', header);
+      if (header.length === 2) {
+        return { keyName: header[0], value: header[1], selected: true };
+      }
+    }
+    return null;
+  });
   const [inputList, setInputList] = useState([
     { keyName: '', value: '', selected: true },
   ]);
@@ -42,10 +53,11 @@ const RequestHeadersTable = ({ onHeadersChange }) => {
           ? styles.payload_wrapper_full
           : styles.payload_wrapper
       }
+      style={{ borderColor: 'transparent' }}
     >
       <table
         className={
-          state.splitView === 'H' ? styles.qp_table : styles.qp_table_small
+          state.splitView === 'H' ? style.qp_table : style.qp_table_small
         }
       >
         <caption>Headers</caption>
@@ -66,6 +78,39 @@ const RequestHeadersTable = ({ onHeadersChange }) => {
           </tr>
         </thead>
         <tbody>
+          {authHeader && (
+            <tr>
+              <td>
+                <input type="checkbox" name="selected" checked readOnly />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  placeholder="Key"
+                  name="keyName"
+                  value={authHeader.keyName}
+                  readOnly
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  placeholder="Value"
+                  name="value"
+                  value={authHeader.value}
+                  readOnly
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  value="Added automatically from authorization."
+                  placeholder="Description"
+                  disabled
+                />
+              </td>
+            </tr>
+          )}
           {inputList.map((x, i) => (
             <>
               <tr key={`reqh-input-row-${i}`}>

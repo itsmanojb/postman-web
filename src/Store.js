@@ -22,11 +22,11 @@ const initialState = {
   apiResponse: {},
 };
 
-const localState = JSON.parse(localStorage.getItem('_post_man'));
+const localState = JSON.parse(sessionStorage.getItem('_post_man'));
 const Store = ({ children }) => {
   const [state, dispatch] = useReducer(Reducer, localState || initialState);
   useEffect(() => {
-    localStorage.setItem('_post_man', JSON.stringify(state));
+    sessionStorage.setItem('_post_man', JSON.stringify(state));
   }, [state]);
 
   return (

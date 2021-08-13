@@ -19,7 +19,7 @@ const RequestBody = () => {
           ? styles.payload_wrapper_full
           : styles.payload_wrapper
       }
-      style={{ borderTop: 0 }}
+      style={{ borderColor: 'transparent' }}
     >
       <div className={styles.inline_radios}>
         <label htmlFor="radio-body-none">

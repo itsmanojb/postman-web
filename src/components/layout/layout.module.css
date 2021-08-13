@@ -285,7 +285,16 @@
 }
 
 .sidebar_tab_panels {
-  /* flex: 1; */
+  flex: 1;
+  height: calc(100vh - 124px);
+  overflow-y: auto;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+}
+
+.sidebar_tab_panels::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
 }
 
 /* Footer */

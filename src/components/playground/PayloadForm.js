@@ -39,6 +39,7 @@ const PayloadForm = ({ onHeadersUpdate }) => {
           }
         >
           Authorization
+          {state.auth && <span className={styles.green_dot}></span>}
         </li>
         <li
           onClick={(e) => setApiSettings('headers')}

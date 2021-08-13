@@ -11,6 +11,9 @@ import { Context } from '../../Store';
 import styles from './playground.module.css';
 
 axios.interceptors.request.use((request) => {
+  console.log('====================================');
+  console.log(request);
+  console.log('====================================');
   request.customData = request.customData || {};
   request.customData.startTime = new Date().getTime();
   return request;
@@ -115,13 +118,12 @@ const URLBox = ({ headers, onSubmit }) => {
     })
       .catch((e) => e)
       .then((res) => {
-        console.log(res);
         dispatch({
           type: 'SET_API_RESPONSE',
           payload: res,
         });
         const reqUrl = `${new Date().getTime()} : ${method} ${fullUrl}`;
-        console.log(state);
+        // console.log(state);
         onSubmit(reqUrl);
       });
   };
