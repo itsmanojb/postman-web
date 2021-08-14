@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 
 export const useLocalStorage = (key, defaultValue) => {
   const stored = localStorage.getItem(key);
-  const initial = stored ? JSON.parse(stored) : defaultValue;
+  const validEntries = stored ? JSON.parse(stored).filter((item) => item) : [];
+  const initial = validEntries.length > 0 ? validEntries : defaultValue;
   const [value, setValue] = useState(initial);
 
   useEffect(() => {

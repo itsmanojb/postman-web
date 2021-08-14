@@ -4,6 +4,15 @@ import styles from './playground.module.css';
 
 const QueryParamsTable = () => {
   const { state, dispatch } = useContext(Context);
+  const [authHeader] = useState(() => {
+    if (state.authLocation === 'qp') {
+      const header = state.authHeader.split(':');
+      if (header.length === 2) {
+        return { keyName: header[0], value: header[1], selected: true };
+      }
+    }
+    return null;
+  });
 
   const [inputList, setInputList] = useState(() => {
     if (state.formData.params) {
@@ -39,7 +48,7 @@ const QueryParamsTable = () => {
 
   const getParams = (list) => {
     const params = list
-      .filter((qp) => qp.selected)
+      .filter((qp) => qp.selected && qp.keyName !== '')
       .map((e) => `${e.keyName}=${e.value}`)
       .join('&');
     dispatch({ type: 'SET_QPARAMS', payload: params });
@@ -78,6 +87,39 @@ const QueryParamsTable = () => {
           </tr>
         </thead>
         <tbody>
+          {authHeader && (
+            <tr>
+              <td>
+                <input type="checkbox" name="selected" checked disabled />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  placeholder="Key"
+                  name="keyName"
+                  value={authHeader.keyName}
+                  readOnly
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  placeholder="Value"
+                  name="value"
+                  value={authHeader.value}
+                  readOnly
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  value="Added automatically from authorization."
+                  placeholder="Description"
+                  disabled
+                />
+              </td>
+            </tr>
+          )}
           {inputList.map((x, i) => (
             <>
               <tr key={`qp-input-row-${i}`}>

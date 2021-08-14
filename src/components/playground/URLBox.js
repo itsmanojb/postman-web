@@ -1,19 +1,16 @@
 import {
   forwardRef,
   useContext,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
 } from 'react';
 import axios from 'axios';
 import { Context } from '../../Store';
-// import { useLocalStorage } from '../hooks/useLocalStorage';
 import styles from './playground.module.css';
 
 axios.interceptors.request.use((request) => {
-  console.log('====================================');
-  console.log(request);
-  console.log('====================================');
   request.customData = request.customData || {};
   request.customData.startTime = new Date().getTime();
   return request;
@@ -73,11 +70,27 @@ const AutoGrowInput = forwardRef((props, ref) => {
   );
 });
 
-const URLBox = ({ headers, onSubmit }) => {
+const URLBox = ({ onSubmit }) => {
   const { state, dispatch } = useContext(Context);
-  // const [requestUrls] = useLocalStorage('_post_man_history', []);
 
   const [url, setUrl] = useState(state.formData.url);
+  const [queryParams, setQueryParams] = useState(state.formData.params);
+
+  useEffect(() => {
+    let qp = state.formData.params;
+    if (state.authLocation === 'qp') {
+      const header = state.authHeader.split(':');
+      if (header.length === 2) {
+        qp = qp
+          ? `${qp}&${header[0]}=${header[1]}`
+          : `${header[0]}=${header[1]}`;
+      }
+    } else {
+      qp = state.formData.params;
+    }
+    setQueryParams(qp);
+  }, [state]);
+
   const [method, setMethod] = useState(state.formData.method);
   const [btnDisabled, setBtnDisabled] = useState(
     state.formData.url.length === 0
@@ -96,9 +109,7 @@ const URLBox = ({ headers, onSubmit }) => {
     e.preventDefault();
     if (!method || !url) return;
 
-    const fullUrl = state.formData.params
-      ? `${url}?${state.formData.params}`
-      : url;
+    const fullUrl = queryParams ? `${url}${queryParams}` : url;
     if (!state.responseUI) {
       dispatch({ type: 'SET_RESPONSE_UI', payload: true });
     }
@@ -148,10 +159,9 @@ const URLBox = ({ headers, onSubmit }) => {
             value={url}
             ref={inputboxRef}
             onChange={handleChange}
+            qp={queryParams}
           />
-          <span>
-            {state.formData.params ? `?${state.formData.params}` : ''}{' '}
-          </span>
+          <span>{queryParams}</span>
         </div>
         <button type="submit" disabled={btnDisabled || state.formSubmitted}>
           {state.formSubmitted ? 'Sending...' : 'Send'}

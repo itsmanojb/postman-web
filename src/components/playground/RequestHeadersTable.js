@@ -3,21 +3,29 @@ import { Context } from '../../Store';
 import styles from './playground.module.css';
 import style from './authHeader.module.css';
 
-const RequestHeadersTable = ({ onHeadersChange }) => {
+const RequestHeadersTable = () => {
   const { state, dispatch } = useContext(Context);
   const [authHeader] = useState(() => {
     if (state.authLocation === 'header') {
       const header = state.authHeader.split(':');
-      console.log('header', header);
       if (header.length === 2) {
         return { keyName: header[0], value: header[1], selected: true };
       }
     }
     return null;
   });
-  const [inputList, setInputList] = useState([
-    { keyName: '', value: '', selected: true },
-  ]);
+
+  const [inputList, setInputList] = useState(() => {
+    if (state.requestHeaders.length) {
+      return state.requestHeaders.map((header) => ({
+        keyName: header.key,
+        value: header.value,
+        selected: true,
+      }));
+    } else {
+      return [{ keyName: '', value: '', selected: true }];
+    }
+  });
 
   const handleInputChange = (e, index) => {
     const { name, value, checked } = e.target;
@@ -40,10 +48,9 @@ const RequestHeadersTable = ({ onHeadersChange }) => {
 
   const getHeaders = (list) => {
     const headers = list
-      .filter((qp) => qp.selected)
-      .map((e) => `${e.keyName}=${e.value}`)
-      .join('&');
-    onHeadersChange(headers);
+      .filter((header) => header.selected && header.keyName !== '')
+      .map((header) => ({ key: header.keyName, value: header.value }));
+    dispatch({ type: 'SET_REQUEST_HEADERS', payload: headers });
   };
 
   return (
@@ -81,7 +88,7 @@ const RequestHeadersTable = ({ onHeadersChange }) => {
           {authHeader && (
             <tr>
               <td>
-                <input type="checkbox" name="selected" checked readOnly />
+                <input type="checkbox" name="selected" checked disabled />
               </td>
               <td>
                 <input

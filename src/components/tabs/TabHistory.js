@@ -65,13 +65,17 @@ const TabHistory = ({ update }) => {
 
   function addNewRequest(reqUrl) {
     let urlArr = [...requestUrls];
-    urlArr.unshift(reqUrl);
-    if (urlArr.length > 20) urlArr.pop();
-    setRequestUrl(urlArr);
+    if (reqUrl) {
+      urlArr.unshift(reqUrl);
+      if (urlArr.length > 20) urlArr.pop();
+      setRequestUrl(urlArr);
+    }
   }
 
   useEffect(() => {
-    addNewRequest(update);
+    if (update) {
+      addNewRequest(update);
+    }
   }, [update]);
 
   return requestUrls.length === 0 ? (

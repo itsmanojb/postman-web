@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { Context } from '../../Store';
 import RightPanel from './RightPanel';
 import Toolbar from './Toolbar';
@@ -9,7 +9,6 @@ import ResponseViewer from './ResponseViewer';
 
 const Playground = ({ triggerSubmit }) => {
   const { state } = useContext(Context);
-  const [reqHeaders, setRequestHeaders] = useState([]);
 
   return (
     <main className={styles.wrapper}>
@@ -41,7 +40,7 @@ const Playground = ({ triggerSubmit }) => {
               </div>
             </div>
           </div>
-          <URLBox headers={reqHeaders} onSubmit={triggerSubmit} />
+          <URLBox onSubmit={triggerSubmit} />
           <div
             className={
               state.splitView === 'V'
@@ -49,7 +48,7 @@ const Playground = ({ triggerSubmit }) => {
                 : styles.panel_horizontal
             }
           >
-            <PayloadForm onHeadersUpdate={setRequestHeaders} />
+            <PayloadForm />
             <ResponseViewer />
           </div>
         </div>

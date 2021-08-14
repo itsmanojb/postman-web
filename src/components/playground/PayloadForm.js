@@ -6,7 +6,7 @@ import QueryParamsTable from './QueryParamsTable';
 import RequestBody from './RequestBody';
 import RequestHeadersTable from './RequestHeadersTable';
 
-const PayloadForm = ({ onHeadersUpdate }) => {
+const PayloadForm = () => {
   const { state } = useContext(Context);
   const [apiSettings, setApiSettings] = useState(
     state.formData.payload ? 'body' : 'qp'
@@ -72,7 +72,7 @@ const PayloadForm = ({ onHeadersUpdate }) => {
           case 'auth':
             return <AuthHeaders />;
           case 'headers':
-            return <RequestHeadersTable onHeadersChange={onHeadersUpdate} />;
+            return <RequestHeadersTable />;
           case 'body':
             return <RequestBody />;
           default:
