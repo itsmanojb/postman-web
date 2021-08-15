@@ -34,6 +34,35 @@ const ResponseWrapper = () => {
     dispatch({ type: 'CANCEL_FORM_SUBMIT' });
   };
 
+  function saveAPIResponse() {
+    var file = new Blob([JSON.stringify(state.apiResponse.data, null, 2)], {
+      type: 'text/plain',
+    });
+    if (window.navigator.msSaveOrOpenBlob)
+      window.navigator.msSaveOrOpenBlob(file, 'response.txt');
+    else {
+      // Others
+      var a = document.createElement('a'),
+        url = URL.createObjectURL(file);
+      a.href = url;
+      a.download = 'response.txt';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function () {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      }, 0);
+    }
+  }
+
+  async function copyAPIResponse() {
+    if (navigator.clipboard) {
+      await navigator.clipboard.writeText(
+        JSON.stringify(state.apiResponse.data, null, 2)
+      );
+    }
+  }
+
   return (
     <>
       {state.formSubmitted && (
@@ -103,7 +132,9 @@ const ResponseWrapper = () => {
                 </div>
               </div>
               <div className={style.saveBtn}>
-                <button>Save Response</button>
+                <button type="button" onClick={saveAPIResponse}>
+                  Save Response
+                </button>
               </div>
             </div>
             {respView === 'body' && (
@@ -169,7 +200,7 @@ const ResponseWrapper = () => {
                   )}
                 </div>
                 <div className={style.resp_action}>
-                  <button>
+                  <button type="button" onClick={copyAPIResponse}>
                     <i className="feather-copy"></i>
                   </button>
                   <button disabled>
@@ -204,7 +235,11 @@ const ResponseWrapper = () => {
           </div>
         </div>
       ) : (
-        <div></div>
+        <div>
+          {state.apiError && (
+            <div className={style.apiError}>{state.apiError}</div>
+          )}
+        </div>
       )}
     </>
   );

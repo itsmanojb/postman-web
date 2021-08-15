@@ -24,6 +24,11 @@ function updateEndTime(response) {
 }
 
 axios.interceptors.response.use(updateEndTime, (e) => {
+  if (typeof e.response === 'undefined') {
+    const err =
+      'A network error occurred. This could be a CORS issue or a dropped internet connection.\nOpen developer console to learn more.';
+    return Promise.reject(err);
+  }
   return Promise.reject(updateEndTime(e.response));
 });
 
@@ -152,12 +157,18 @@ const URLBox = ({ onSubmit }) => {
     })
       .catch((e) => e)
       .then((res) => {
-        dispatch({
-          type: 'SET_API_RESPONSE',
-          payload: res,
-        });
+        if (typeof res === 'string' || typeof res === 'undefined') {
+          dispatch({
+            type: 'SET_API_ERROR',
+            payload: res,
+          });
+        } else {
+          dispatch({
+            type: 'SET_API_RESPONSE',
+            payload: res,
+          });
+        }
         const reqUrl = `${new Date().getTime()} : ${method} ${fullUrl}`;
-        // console.log(state);
         onSubmit(reqUrl);
       });
   };

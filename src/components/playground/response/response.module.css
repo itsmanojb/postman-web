@@ -393,3 +393,10 @@
   display: flex;
   align-items: center;
 }
+
+.apiError {
+  padding: 2rem 1rem;
+  font-size: 15px;
+  color: var(--text-color);
+  white-space: pre-wrap;
+}

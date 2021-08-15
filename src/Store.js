@@ -20,6 +20,7 @@ const initialState = {
   formSubmitted: false,
   responseUI: false,
   apiResponse: {},
+  apiError: null,
 };
 
 const localState = JSON.parse(sessionStorage.getItem('_post_man'));

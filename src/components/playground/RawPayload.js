@@ -21,7 +21,6 @@ const RawPayload = () => {
 
   const handleChange = (e) => {
     setInput(e);
-    console.log(e);
     dispatch({ type: 'SET_PAYLOAD', payload: e });
   };
 

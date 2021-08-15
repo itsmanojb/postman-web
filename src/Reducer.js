@@ -96,6 +96,14 @@ const Reducer = (state, action) => {
       return {
         ...state,
         apiResponse: action.payload,
+        apiError: null,
+        formSubmitted: false,
+      };
+    case 'SET_API_ERROR':
+      return {
+        ...state,
+        apiResponse: {},
+        apiError: action.payload,
         formSubmitted: false,
       };
     case 'RESET_FORM':

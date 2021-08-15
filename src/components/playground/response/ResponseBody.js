@@ -55,7 +55,7 @@ const ResponseBody = ({ data, viewAs, wrap }) => {
       {viewAs === 'preview' && (
         <>
           {typeof data === 'object' ? (
-            <div className={style.res_preview}>JSON.stringify(data)</div>
+            <div className={style.res_preview}>{JSON.stringify(data)}</div>
           ) : (
             <div dangerouslySetInnerHTML={{ __html: data }}></div>
           )}
