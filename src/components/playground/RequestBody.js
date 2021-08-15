@@ -33,7 +33,7 @@ const RequestBody = () => {
           />
           None
         </label>
-        <label htmlFor="radio-body-form-data">
+        <label htmlFor="radio-body-form-data" className={styles.disabled_radio}>
           <input
             type="radio"
             value="form-data"
@@ -41,6 +41,7 @@ const RequestBody = () => {
             id="radio-body-form-data"
             onChange={handleChange}
             name="bodyType"
+            disabled
           />
           form-data
         </label>

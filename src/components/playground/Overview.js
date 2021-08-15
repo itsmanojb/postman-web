@@ -29,12 +29,12 @@ const Overview = () => {
 
       <p>Features include:</p>
       <ul>
-        <li>UI similar to actual Postman Desktop app</li>
+        <li>Postman Desktop UI</li>
         <li>API client (powered by axios)</li>
         <li>Test common REST API methods (Get, Post, Put, Patch and Delete)</li>
         <li>Supports Query params, Request headers, Authentication headers</li>
-        <li>Response (Pretty/Raw) viewer</li>
-        <li>API history upto 50 entries</li>
+        <li>JSON Response (Pretty/Raw) viewer</li>
+        <li>API Log</li>
         <li>Dark mode support</li>
       </ul>
 

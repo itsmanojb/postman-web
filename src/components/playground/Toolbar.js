@@ -46,7 +46,7 @@ const Toolbar = () => {
           >
             <span>{state.formData.url || 'Untitled Request'}</span>
             {!state.showOverview && (
-              <button type="button" onClick={(e) => resetForm()}>
+              <button type="button" onClick={(e) => resetForm(e)}>
                 &times;
               </button>
             )}
