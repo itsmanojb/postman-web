@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Context } from '../../Store';
+import { Context } from '../../contexts/Store';
 import styles from './playground.module.css';
 import ResponseWrapper from './response/ResponseWrapper';
 

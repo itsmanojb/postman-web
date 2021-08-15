@@ -6,9 +6,9 @@ import TabEnv from '../tabs/TabEnv';
 import TabHistory from '../tabs/TabHistory';
 import TabMonitors from '../tabs/TabMonitors';
 import TabServers from '../tabs/TabServers';
-import { Context } from '../../Store';
+import { Context } from '../../contexts/Store';
 
-const Sidebar = ({ refresh }) => {
+const Sidebar = () => {
   const { state, dispatch } = useContext(Context);
   const [selectedTab, setSelectedTab] = useState(state.sideDrawerTab);
 
@@ -140,7 +140,7 @@ const Sidebar = ({ refresh }) => {
                 case 'monitors':
                   return <TabMonitors />;
                 case 'history':
-                  return <TabHistory update={refresh} />;
+                  return <TabHistory />;
                 default:
                   return <TabCollections />;
               }

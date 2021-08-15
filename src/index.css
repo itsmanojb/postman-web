@@ -183,3 +183,23 @@ ul {
 .pretty_response .key {
   color: var(--key);
 }
+
+span.GET {
+  color: rgb(42, 177, 119);
+}
+
+span.POST {
+  color: #f7d10d;
+}
+
+span.PUT {
+  color: #4a62da;
+}
+
+span.PATCH {
+  color: var(--text-color-dark);
+}
+
+span.DELETE {
+  color: #ff1d1d;
+}

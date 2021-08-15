@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import LineLoader from './LineLoader';
 import HeadersTable from './HeadersTable';
-import { Context } from '../../../Store';
+import { Context } from '../../../contexts/Store';
 import ResponseBody from './ResponseBody';
 import style from './response.module.css';
 

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/mode-json';
 import 'ace-builds/src-noconflict/theme-tomorrow';
-import { Context } from '../../Store';
+import { Context } from '../../contexts/Store';
 // import '/monokai';
 
 const RawPayload = () => {

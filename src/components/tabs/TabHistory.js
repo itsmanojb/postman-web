@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useContext, useEffect } from 'react';
 import styles from './tab.module.css';
 import image from '../../images/no-history.png';
+import { HistoryContext } from '../../contexts/History';
 
 function doDatewiseGroup(dataArr) {
   const dates = [];
@@ -46,8 +46,12 @@ const UrlList = ({ items }) => {
                       key={`req-history-item-${i}-${j}`}
                       title={item.split(' ')[1]}
                     >
-                      <span>{item.split(' ')[0]}</span>
-                      {item.split(' ')[1]}
+                      <span className={item.split(' ')[0]}>
+                        {item.split(' ')[0] === 'DELETE'
+                          ? 'DEL'
+                          : item.split(' ')[0]}
+                      </span>
+                      <span>{item.split(' ')[1]}</span>
                     </li>
                   );
                 })}
@@ -60,25 +64,10 @@ const UrlList = ({ items }) => {
   );
 };
 
-const TabHistory = ({ update }) => {
-  const [requestUrls, setRequestUrl] = useLocalStorage('_post_man_history', []);
+const TabHistory = () => {
+  const { apis } = useContext(HistoryContext);
 
-  function addNewRequest(reqUrl) {
-    let urlArr = [...requestUrls];
-    if (reqUrl) {
-      urlArr.unshift(reqUrl);
-      if (urlArr.length > 20) urlArr.pop();
-      setRequestUrl(urlArr);
-    }
-  }
-
-  useEffect(() => {
-    if (update) {
-      addNewRequest(update);
-    }
-  }, [update]);
-
-  return requestUrls.length === 0 ? (
+  return apis.length === 0 ? (
     <div className={styles.empty_tab}>
       <img src={image} alt="" />
       <h4>You haven't sent any requests.</h4>
@@ -86,7 +75,7 @@ const TabHistory = ({ update }) => {
       <span>Show me how</span>
     </div>
   ) : (
-    <UrlList items={requestUrls} />
+    <UrlList items={apis} />
   );
 };
 

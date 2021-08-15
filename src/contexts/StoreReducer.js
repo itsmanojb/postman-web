@@ -1,4 +1,4 @@
-const Reducer = (state, action) => {
+const StoreReducer = (state, action) => {
   switch (action.type) {
     case 'SET_SIDEDRAWER':
       return {
@@ -128,4 +128,4 @@ const Reducer = (state, action) => {
   }
 };
 
-export default Reducer;
+export default StoreReducer;

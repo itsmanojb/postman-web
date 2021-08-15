@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Context } from '../../Store';
+import { Context } from '../../contexts/Store';
 import RightPanel from './RightPanel';
 import Toolbar from './Toolbar';
 import styles from './playground.module.css';
@@ -7,7 +7,7 @@ import URLBox from './URLBox';
 import PayloadForm from './PayloadForm';
 import ResponseViewer from './ResponseViewer';
 
-const Playground = ({ triggerSubmit }) => {
+const Playground = () => {
   const { state } = useContext(Context);
 
   return (
@@ -40,7 +40,7 @@ const Playground = ({ triggerSubmit }) => {
               </div>
             </div>
           </div>
-          <URLBox onSubmit={triggerSubmit} />
+          <URLBox />
           <div
             className={
               state.splitView === 'V'

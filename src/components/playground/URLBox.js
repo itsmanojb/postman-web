@@ -7,7 +7,8 @@ import {
   useState,
 } from 'react';
 import axios from 'axios';
-import { Context } from '../../Store';
+import { Context } from '../../contexts/Store';
+import { HistoryContext } from '../../contexts/History';
 import styles from './playground.module.css';
 
 axios.interceptors.request.use((request) => {
@@ -75,8 +76,9 @@ const AutoGrowInput = forwardRef((props, ref) => {
   );
 });
 
-const URLBox = ({ onSubmit }) => {
+const URLBox = () => {
   const { state, dispatch } = useContext(Context);
+  const { dispatch: dispatchAPIEntry } = useContext(HistoryContext);
 
   const [url, setUrl] = useState(state.formData.url);
   const [queryParams, setQueryParams] = useState(state.formData.params);
@@ -169,7 +171,7 @@ const URLBox = ({ onSubmit }) => {
           });
         }
         const reqUrl = `${new Date().getTime()} : ${method} ${fullUrl}`;
-        onSubmit(reqUrl);
+        dispatchAPIEntry({ type: 'ADD_NEW_ENTRY', payload: reqUrl });
       });
   };
 

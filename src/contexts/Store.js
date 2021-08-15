@@ -1,5 +1,5 @@
 import { createContext, useEffect, useReducer } from 'react';
-import Reducer from './Reducer';
+import StoreReducer from './StoreReducer';
 
 const initialState = {
   sideDrawerOpened: false,
@@ -25,7 +25,10 @@ const initialState = {
 
 const localState = JSON.parse(sessionStorage.getItem('_post_man'));
 const Store = ({ children }) => {
-  const [state, dispatch] = useReducer(Reducer, localState || initialState);
+  const [state, dispatch] = useReducer(
+    StoreReducer,
+    localState || initialState
+  );
   useEffect(() => {
     sessionStorage.setItem('_post_man', JSON.stringify(state));
   }, [state]);
