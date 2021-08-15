@@ -2,6 +2,7 @@ import { createContext, useEffect, useReducer } from 'react';
 import StoreReducer from './StoreReducer';
 
 const initialState = {
+  overviewTab: 'hidden',
   sideDrawerOpened: false,
   sideDrawerTab: 'history',
   infoPanelOpened: false,

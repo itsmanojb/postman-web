@@ -1,5 +1,15 @@
 const StoreReducer = (state, action) => {
   switch (action.type) {
+    case 'SET_OVERVIEW':
+      return {
+        ...state,
+        overviewTab: action.payload,
+      };
+    case 'CLOSE_OVERVIEW':
+      return {
+        ...state,
+        overviewTab: '',
+      };
     case 'SET_SIDEDRAWER':
       return {
         ...state,
