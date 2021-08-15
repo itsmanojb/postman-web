@@ -3,7 +3,7 @@ const HistoryReducer = (state, action) => {
     case 'ADD_NEW_ENTRY':
       const entries = [...state];
       entries.unshift(action.payload);
-      if (entries.length > 20) entries.pop();
+      if (entries.length > 50) entries.pop();
       return entries;
     case 'CLEAR_HISTORY':
       return [];

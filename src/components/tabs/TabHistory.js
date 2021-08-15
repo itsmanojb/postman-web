@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import styles from './tab.module.css';
 import image from '../../images/no-history.png';
 import { HistoryContext } from '../../contexts/History';
