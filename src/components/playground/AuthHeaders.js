@@ -119,6 +119,7 @@ const AuthHeaders = () => {
               <div>
                 <textarea
                   value={bearer}
+                  spellCheck={false}
                   onChange={(e) => setAuthHeader('bearer', e.target.value)}
                 />
               </div>
@@ -131,6 +132,7 @@ const AuthHeaders = () => {
                 <div>
                   <input
                     value={authKey}
+                    spellCheck={false}
                     onChange={(e) => setAuthHeader('authKey', e.target.value)}
                   />
                 </div>
@@ -140,6 +142,7 @@ const AuthHeaders = () => {
                 <div>
                   <input
                     value={authValue}
+                    spellCheck={false}
                     onChange={(e) => setAuthHeader('authValue', e.target.value)}
                   />
                 </div>

@@ -49,7 +49,10 @@ const PayloadForm = () => {
               : styles.payload_tab
           }
         >
-          Headers
+          Headers{' '}
+          {state.requestHeaders.length > 0 && (
+            <span className={styles.green_dot}></span>
+          )}
         </li>
         <li
           onClick={(e) => setApiSettings('body')}
@@ -59,7 +62,8 @@ const PayloadForm = () => {
               : styles.payload_tab
           }
         >
-          Body
+          Body{' '}
+          {state.formData.payload && <span className={styles.green_dot}></span>}
         </li>
         <li className={styles.payload_tab_disabled}>Pre-request Script</li>
         <li className={styles.payload_tab_disabled}>Tests</li>

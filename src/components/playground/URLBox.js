@@ -75,6 +75,7 @@ const URLBox = ({ onSubmit }) => {
 
   const [url, setUrl] = useState(state.formData.url);
   const [queryParams, setQueryParams] = useState(state.formData.params);
+  const [headers, setHeaders] = useState(null);
 
   useEffect(() => {
     let qp = state.formData.params;
@@ -89,6 +90,27 @@ const URLBox = ({ onSubmit }) => {
       qp = state.formData.params;
     }
     setQueryParams(qp);
+
+    let headerObject = {},
+      authHeader = {};
+    if (state.requestHeaders.length) {
+      headerObject = {};
+      state.requestHeaders.forEach((header) => {
+        const { key, value } = header;
+        headerObject[key] = value;
+      });
+    }
+
+    if (state.auth) {
+      authHeader = {};
+      const auth = state.authHeader.split(':');
+      if (state.authLocation === 'header') {
+        authHeader[auth[0]] = auth[1];
+      } else {
+        delete authHeader[auth[0]];
+      }
+    }
+    setHeaders({ ...headerObject, ...authHeader });
   }, [state]);
 
   const [method, setMethod] = useState(state.formData.method);
@@ -126,6 +148,7 @@ const URLBox = ({ onSubmit }) => {
       method,
       url: fullUrl,
       data: JSON.parse(state.formData.payload),
+      headers,
     })
       .catch((e) => e)
       .then((res) => {
