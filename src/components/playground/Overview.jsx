@@ -1,27 +1,25 @@
-import styles from './playground.module.css';
+import styles from "./playground.module.css";
 
 const Overview = () => {
   return (
     <div className={styles.overview}>
-      <h5>A Postman</h5>
+      <h5>Postman Clone</h5>
       <p>
-        A clone of Postman, an API platform for building and using APIs. Postman
-        simplifies each step of the API lifecycle and streamlines collaboration
-        so you can create better APIs—faster. This app is a cloned version of
-        the desktop app, built with{' '}
+        Postman is an API platform for building and using APIs. This clone
+        application of Postman simplifies each step of the API lifecycle and
+        streamlines collaboration so you can create better APIs—faster. This app
+        is a cloned version of the desktop app, built with{" "}
         <a
           href="https://reactjs.org/"
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           React
-        </a>{' '}
-        and{' '}
+        </a>{" "}
+        and{" "}
         <a
           href="https://axios-http.com/"
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           Axios
         </a>
         .
@@ -40,14 +38,13 @@ const Overview = () => {
 
       <p>
         <small>
-          Developed by{' '}
+          Developed by{" "}
           <a
             href="https://manojbarman.in"
             target="_blank"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             Manoj B
-          </a>{' '}
+          </a>{" "}
         </small>
       </p>
     </div>

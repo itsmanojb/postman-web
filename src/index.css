@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
 
 :root {
   --padding: 16px;
@@ -8,7 +8,7 @@
 
   --sidebar-width: 380px;
   --sidebar-width-collapsed: 40px;
-  --font: 'Roboto', sans-serif;
+  --font: "Roboto", sans-serif;
 
   /* Colors */
   --theme-color: #ff6c37;
@@ -82,7 +82,7 @@ html {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -98,6 +98,10 @@ code {
 
 *:focus {
   outline: none;
+}
+
+input {
+  accent-color: var(--theme-color);
 }
 
 input::-webkit-input-placeholder,
@@ -148,7 +152,7 @@ ul {
 
 .pretty_response {
   padding-inline-start: 5px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   color: var(--text-color);
   font-size: 14px;
   line-height: 1.1;
